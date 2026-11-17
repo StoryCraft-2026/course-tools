@@ -159,7 +159,24 @@
       B + '.smart-next__link--small,' + B + '.smart-next__link--small:hover{color:' + C.teal + '!important}',
       B + '.btn--comment{background:' + C.teal + '!important;border-color:' + C.teal + '!important;color:#fff!important}',
       B + '#comment_body:focus,' + B + '.quiz-question-card textarea:focus',
-      '{border-color:' + C.teal + '!important;box-shadow:0 0 0 2px rgba(24,101,110,.15)!important;outline:0}'
+      '{border-color:' + C.teal + '!important;box-shadow:0 0 0 2px rgba(24,101,110,.15)!important;outline:0}',
+
+      // Header: brand fonts on the menu links (the theme sets them in its serif).
+      B + '.header .header-menu a,' + B + '.header .user__dropdown a',
+      '{font-family:Lato,"Open Sans",sans-serif!important;font-size:15px!important;font-weight:700!important;color:' + C.noir + '!important;letter-spacing:.01em}',
+      B + '.header .header-menu a:hover,' + B + '.header .user__dropdown a:hover{color:' + C.teal + '!important}',
+      B + '.header .user__dropdown a{font-weight:400!important}',
+
+      // Phone menu: drop the duplicate "My Library", group the account links, lighter icon.
+      '@media (max-width:767px){',
+      B + '.header .header-ham{transform:scale(.7);transform-origin:right center}',
+      B + '.header .header-ham span{background:' + C.noir + '!important}',
+      B + '.header .header-menu{padding:4px 0 18px!important}',
+      B + '.header .header-menu > a{line-height:46px!important;font-size:17px!important}',
+      B + '.header .header-menu > a[href$="/library"]{display:none!important}',
+      B + '.header .user__dropdown{margin:8px 32px 0!important;padding-top:8px!important;border-top:1px solid #e4e0d4!important;box-shadow:none!important}',
+      B + '.header .user__dropdown a{display:block;line-height:42px!important;font-size:16px!important;color:#4a4a4a!important}',
+      '}'
     ].join('');
   }
 
