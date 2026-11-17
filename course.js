@@ -101,7 +101,7 @@
     'border-bottom:1px solid ' + C.gold + ';cursor:pointer;font-variant-numeric:tabular-nums}',
     'a.sca-ts:hover{color:' + C.tealDark + '!important;border-bottom-color:' + C.teal + '}',
 
-    '.sca-end{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:14px 0 4px;padding:14px 16px;',
+    '.sca-end{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 14px;padding:14px 16px;',
     'border:1px solid ' + C.teal + ';border-left:4px solid ' + C.teal + ';border-radius:6px;background:#fff;',
     'animation:scaIn .35s ease-out}',
     '.sca-end__msg{flex:1 1 220px;margin:0;font-weight:700;color:' + C.noir + '}',
@@ -124,7 +124,7 @@
     '.sca-ws__list{list-style:none;margin:0 0 14px;padding:0}',
     '.sca-ws__item{display:flex;gap:12px;padding:10px 0;border-top:1px solid #eee}',
     '.sca-ws__item:first-child{border-top:0;padding-top:0}',
-    '.sca-ws__date{flex:0 0 46px;text-align:center;background:' + C.cream + ';border-radius:4px;padding:5px 0;line-height:1.1}',
+    '.sca-ws__date{flex:0 0 46px;align-self:flex-start;text-align:center;background:' + C.cream + ';border-radius:4px;padding:5px 0;line-height:1.1}',
     '.sca-ws__mon{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:' + C.teal + ';font-weight:700}',
     '.sca-ws__day{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-weight:600;color:' + C.noir + '}',
     '.sca-ws__name{display:block;font-weight:700;font-size:14px;line-height:1.3;color:' + C.noir + '!important;text-decoration:none!important}',
@@ -138,23 +138,28 @@
   ].join('');
 
   if (CONFIG.brand) {
+    // "html body" raises specificity above the inline <style> blocks each theme prints.
+    var B = 'html body ';
     css += [
-      'body{font-family:Lato,"Open Sans",Helvetica,Arial,sans-serif!important;color:#222}',
-      'h1,h2,h3,h4,.panel__title,.hero__title,.product__title,.syllabus__title,.media-heading',
-      '{font-family:"Cormorant Garamond",Georgia,serif!important;font-weight:600!important;letter-spacing:0;color:' + C.noir + '}',
-      'h5,h6,.panel__sub-title{font-family:Lato,"Open Sans",sans-serif!important}',
-      '.panel__title{font-size:2.1em;line-height:1.15}',
-      '.panel__sub-title a{color:' + C.gold + '!important;text-transform:uppercase;letter-spacing:.08em;font-size:.8em;font-weight:700}',
-      '#section-post_body a:not(.btn):not(.sca-ts),#section-product_body a:not(.btn){color:' + C.teal + ';text-decoration-color:' + C.gold + '}',
-      '.btn--solid,.btn--solid:focus{background-color:' + C.teal + '!important;border-color:' + C.teal + '!important;color:#fff!important}',
-      '.btn--solid:hover{background-color:' + C.tealDark + '!important;border-color:' + C.tealDark + '!important}',
-      '.btn--completion{border-color:' + C.teal + '!important;color:' + C.teal + '!important}',
-      '.btn--completion[data-post-completion-toggle="true"]{background:' + C.teal + '!important;color:#fff!important}',
-      '.progress-bar,.progress__bar{background-color:' + C.teal + '!important}',
-      '.smart-next{background:' + C.cream + '!important}',
-      '.smart-next__link--small,.smart-next__link--small:hover{color:' + C.teal + '!important}',
-      '.btn--comment{background:' + C.teal + '!important;border-color:' + C.teal + '!important;color:#fff!important}',
-      '#comment_body:focus,.quiz-question-card textarea:focus{border-color:' + C.teal + '!important;box-shadow:0 0 0 2px rgba(24,101,110,.15)!important;outline:0}'
+      B + '{font-family:Lato,"Open Sans",Helvetica,Arial,sans-serif!important;color:#222}',
+      B + 'h1,' + B + 'h2,' + B + 'h3,' + B + 'h4,' + B + '.panel__title,' + B + '.hero__title,' + B + '.media-heading',
+      '{font-family:"Cormorant Garamond",Georgia,serif!important;font-weight:600!important;letter-spacing:0!important;color:' + C.noir + '}',
+      B + 'h5,' + B + 'h6,' + B + '.panel__sub-title{font-family:Lato,"Open Sans",sans-serif!important}',
+      B + '.panel__title{font-size:2.1em;line-height:1.15}',
+      B + '.panel__sub-title a{color:' + C.gold + '!important;text-transform:uppercase;letter-spacing:.08em;font-size:.8em;font-weight:700}',
+      B + '#section-post_body a:not(.btn):not(.sca-ts):not(.sca-end__btn),' + B + '#section-product_body a:not(.btn)',
+      '{color:' + C.teal + ';text-decoration-color:' + C.gold + '}',
+      B + '.btn{font-family:Lato,"Open Sans",sans-serif!important;font-weight:700!important;letter-spacing:.01em}',
+      B + '.btn--solid,' + B + '.btn--solid:focus{background-color:' + C.teal + '!important;border-color:' + C.teal + '!important;color:#fff!important}',
+      B + '.btn--solid:hover{background-color:' + C.tealDark + '!important;border-color:' + C.tealDark + '!important}',
+      B + '.btn--completion{border-color:' + C.teal + '!important;color:' + C.teal + '!important}',
+      B + '.btn--completion[data-post-completion-toggle="true"]{background:' + C.teal + '!important;border-color:' + C.teal + '!important;color:#fff!important}',
+      B + '.progress-bar,' + B + '.progress__bar{background-color:' + C.teal + '!important}',
+      B + '.smart-next{background:' + C.cream + '!important}',
+      B + '.smart-next__link--small,' + B + '.smart-next__link--small:hover{color:' + C.teal + '!important}',
+      B + '.btn--comment{background:' + C.teal + '!important;border-color:' + C.teal + '!important;color:#fff!important}',
+      B + '#comment_body:focus,' + B + '.quiz-question-card textarea:focus',
+      '{border-color:' + C.teal + '!important;box-shadow:0 0 0 2px rgba(24,101,110,.15)!important;outline:0}'
     ].join('');
   }
 
@@ -398,19 +403,21 @@
         var nextHref = nextLink ? nextLink.getAttribute('href') : null;
         var nextTitle = document.querySelector('.smart-next__link:not(.smart-next__link--small)');
         nextTitle = nextTitle ? nextTitle.textContent.trim() : '';
-        if (done && !nextHref) return;
+        // Kajabi's player already counts down to the next lesson, so only step in when
+        // the lesson hasn't been marked complete.
+        if (!comp || done) return;
 
         var box = el('div', { 'class': 'sca-end', role: 'status' });
-        var msg = done ? 'Nice work.' : 'Finished the video? Mark this lesson complete.';
-        var html = '<p class="sca-end__msg">' + esc(msg) +
-          (nextHref ? '<span class="sca-end__next">Up next: ' + esc(nextTitle || 'the next lesson') + '</span>' : '') + '</p>';
-        if (!done && comp) html += '<a href="#" class="sca-end__btn sca-end__btn--solid" data-sca="complete">Mark complete</a>';
-        if (nextHref) html += '<a href="' + esc(nextHref) + '" class="sca-end__btn ' + (done || !comp ? 'sca-end__btn--solid' : 'sca-end__btn--ghost') + '">Next lesson →</a>';
+        var html = '<p class="sca-end__msg">Finished the video? Mark this lesson complete.' +
+          (nextHref ? '<span class="sca-end__next">Up next: ' + esc(nextTitle || 'the next lesson') + '</span>' : '') + '</p>' +
+          '<a href="#" class="sca-end__btn sca-end__btn--solid" data-sca="complete">Mark complete</a>';
+        if (nextHref) html += '<a href="' + esc(nextHref) + '" class="sca-end__btn sca-end__btn--ghost">Next lesson →</a>';
         html += '<button type="button" class="sca-end__x" aria-label="Dismiss">×</button>';
         box.innerHTML = html;
 
-        var player = document.querySelector('#section-post_player');
-        (player || document.body).insertAdjacentElement(player ? 'afterend' : 'afterbegin', box);
+        var mark = document.querySelector('#section-post_body .mark-as-complete');
+        if (mark) mark.parentNode.insertBefore(box, mark);
+        else document.querySelector('#section-post_player').insertAdjacentElement('afterend', box);
 
         box.addEventListener('click', function (e) {
           var t = e.target;
@@ -425,10 +432,8 @@
           }
         });
 
-        if (comp && !done) {
-          comp.classList.add('sca-pulse');
-          setTimeout(function () { comp.classList.remove('sca-pulse'); }, 4500);
-        }
+        comp.classList.add('sca-pulse');
+        setTimeout(function () { comp.classList.remove('sca-pulse'); }, 4500);
       });
     });
   }
