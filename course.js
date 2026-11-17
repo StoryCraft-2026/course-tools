@@ -23,7 +23,7 @@
     quizBox: true,
     quizAutosave: true,
     timestamps: true,
-    videoEnd: true,
+    videoEnd: false, // Kajabi already marks video lessons complete when the video ends
     workshops: true,
     commentPrompt: true,
     fixLinks: true,

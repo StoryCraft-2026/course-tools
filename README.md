@@ -12,7 +12,7 @@ One script that every StoryCraft course and recording loads. Change it here and 
 | Quiz answer box | Open-ended quiz questions get a six-line box instead of a one-line field |
 | Quiz autosave | Unsent quiz answers are kept in that browser for 30 days and restored if the page reloads; cleared once the quiz is submitted |
 | Video timestamps | A time like `12:40` at the start of a line in the lesson text, or `[12:40]` anywhere, becomes a link that jumps the video there |
-| Video-end prompt | When a video finishes and the lesson isn't marked complete, a box offers "Mark complete" and the next lesson |
+| Video-end prompt (off) | Built but switched off: Kajabi already marks a video lesson complete when the video ends and counts down to the next lesson |
 | Upcoming workshops | On recordings, a sidebar card lists the next three sessions from the Writing Workshops page (`/booking`) |
 | Comment prompts | The comment box shows a reflection question instead of "Say Something..." |
 | Link repair | Lesson links typed as `storycraftacademy.org/...` without `https://` are fixed |
