@@ -228,7 +228,9 @@
     var note = null;
     if (CONFIG.quizAutosave && ls) {
       note = el('span', { 'class': 'sca-saved', 'aria-live': 'polite' });
-      ta.parentNode.insertBefore(note, ta.nextSibling);
+      // Outside Kajabi's .sage-input wrapper, which lays its children out in reverse.
+      var wrap = ta.parentNode;
+      wrap.parentNode.insertBefore(note, wrap.nextSibling);
       ta.__scaNote = note;
       if (!ta.value) {
         try {
