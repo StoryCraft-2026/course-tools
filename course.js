@@ -27,6 +27,29 @@
     workshops: true,
     commentPrompt: true,
     fixLinks: true,
+    header: true,
+
+    // Course-page header, matching the main site's menu. Keep in step with the
+    // site header (Website > Design > Header) when that menu changes.
+    logo: 'https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2162382539/settings_images/5c53458-3083-04b1-8025-07c2e3f562f6_long_logo.png',
+    libraryLink: { label: 'Back to the Library', short: 'Library', href: '/library' },
+    nav: [
+      { label: 'Offerings', items: [
+        { label: 'Personalized Coaching', href: '/coaching-options' },
+        { label: 'Writing Workshops', href: '/booking' },
+        { label: 'Courses', href: '/courses' },
+        { label: 'Author Resources', href: '/resources' },
+        { label: 'Retreats', href: '/retreats' },
+        { label: 'Free Tools', href: '/free-tools' }
+      ] },
+      { label: 'About Us', items: [
+        { label: 'Get the App', href: '/app' },
+        { label: 'Meet the Team', href: '/team' },
+        { label: 'About StoryMetrics™', href: '/about-storymetrics' },
+        { label: 'Work with Us', href: '/work-with-us' }
+      ] },
+      { label: 'Contact', href: '/contact' }
+    ],
 
     workshopsPage: '/booking',
     workshopsToShow: 3,
@@ -177,6 +200,64 @@
       B + '.header .user__dropdown{margin:8px 32px 0!important;padding-top:8px!important;border-top:1px solid #e4e0d4!important;box-shadow:none!important}',
       B + '.header .user__dropdown a{display:block;line-height:42px!important;font-size:16px!important;color:#4a4a4a!important}',
       '}'
+    ].join('');
+  }
+
+  if (CONFIG.header) {
+    var H = '#section-header ';
+    var chev = 'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 8%27%3E%3Cpath d=%27M1 1.5l5 5 5-5%27 fill=%27none%27 stroke=%27%23FFF9EB%27 stroke-width=%271.8%27/%3E%3C/svg%3E")';
+    css += [
+      H + '.header.sca-replaced{display:none!important}',
+      '.sca-hdr{position:relative;z-index:1000;background:' + C.teal + ';border-bottom:3px solid ' + C.gold + ';',
+      'font-family:"Open Sans",Lato,Helvetica,Arial,sans-serif}',
+      '.sca-hdr *{box-sizing:border-box}',
+      '.sca-hdr__bar{display:flex;align-items:center;gap:20px;min-height:76px;max-width:1200px;margin:0 auto;padding:0 24px}',
+      '.sca-hdr__logo{display:flex;align-items:center;margin-right:auto;flex:0 0 auto}',
+      '.sca-hdr__logo img{display:block;height:auto;max-height:40px;width:auto;max-width:160px}',
+      '.sca-hdr__nav{display:flex;align-items:center;gap:26px}',
+      '.sca-hdr a,.sca-hdr button{font-family:inherit}',
+      '.sca-hdr__link,.sca-dd__btn{display:inline-flex;align-items:center;gap:7px;padding:8px 0;background:none;border:0;cursor:pointer;',
+      'color:#FFF9EB!important;font-size:17px;font-weight:400;line-height:1.2;text-decoration:none!important;white-space:nowrap}',
+      '.sca-hdr__link:hover,.sca-dd__btn:hover,.sca-dd.is-open>.sca-dd__btn{color:#fff!important;text-decoration:underline!important;text-decoration-color:' + C.gold + '!important;text-underline-offset:6px}',
+      '.sca-dd__btn .sca-chev{width:12px;height:8px;background:' + chev + ' center/contain no-repeat;transition:transform .15s}',
+      '.sca-dd.is-open>.sca-dd__btn .sca-chev{transform:rotate(180deg)}',
+      '.sca-hdr__lib{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:4px;background:#FFF9EB;',
+      'color:' + C.teal + '!important;font-size:15px;font-weight:700;line-height:1.2;text-decoration:none!important;white-space:nowrap;',
+      'border:1px solid #FFF9EB;transition:background .15s,color .15s}',
+      '.sca-hdr__lib:hover{background:' + C.gold + ';border-color:' + C.gold + ';color:#fff!important}',
+      '.sca-hdr__lib .sca-arrow{font-size:16px;line-height:1}',
+      '.sca-dd{position:relative}',
+      '.sca-dd__menu{position:absolute;top:calc(100% + 10px);left:-20px;min-width:230px;padding:10px 0;background:#fff;border-radius:4px;',
+      'box-shadow:0 10px 40px rgba(0,0,0,.14);display:none}',
+      '.sca-dd.is-open>.sca-dd__menu{display:block}',
+      '.sca-dd--user .sca-dd__menu{left:auto;right:0;min-width:180px}',
+      '.sca-dd__menu a{display:block;padding:9px 20px;color:#595959!important;font-size:16px;line-height:1.35;text-decoration:none!important}',
+      '.sca-dd__menu a:hover{color:' + C.teal + '!important;background:' + C.cream + '}',
+      '.sca-dd--user .sca-dd__btn{padding:0}',
+      '.sca-hdr__avatar{width:36px;height:36px;border-radius:50%;border:2px solid #FFF9EB;object-fit:cover;display:block}',
+      '.sca-hdr__search svg{width:18px;height:18px;display:block}',
+      '.sca-hdr__ham{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;background:none;border:0;cursor:pointer}',
+      '.sca-hdr__ham span{display:block;height:2px;width:100%;background:#FFF9EB;border-radius:2px;transition:transform .2s,opacity .2s}',
+      '.sca-hdr__ham[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}',
+      '.sca-hdr__ham[aria-expanded="true"] span:nth-child(2){opacity:0}',
+      '.sca-hdr__ham[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}',
+      '.sca-hdr__panel{display:none;background:' + C.teal + ';padding:6px 24px 22px;border-top:1px solid rgba(255,249,235,.15)}',
+      '.sca-hdr__panel.is-open{display:block}',
+      '.sca-hdr__panel h4{margin:14px 0 4px!important;font-family:"Open Sans",Lato,sans-serif!important;font-size:16px!important;font-weight:700!important;color:#FFF9EB!important;letter-spacing:0!important}',
+      '.sca-hdr__panel a{display:block;padding:9px 0 9px 18px;color:#FFF9EB!important;font-size:16px;text-decoration:none!important}',
+      '.sca-hdr__panel a.sca-top{padding-left:0;font-weight:700;margin-top:8px}',
+      '.sca-hdr__panel hr{border:0;border-top:1px solid rgba(255,249,235,.25);margin:14px 0 6px}',
+      '.sca-hdr__panel .sca-acct a{padding-left:0}',
+      '.sca-hdr__lib--mobile{display:none}',
+      '@media (max-width:991px){',
+      '.sca-hdr__nav{display:none}',
+      '.sca-hdr__ham{display:flex}',
+      '.sca-hdr__lib--mobile{display:inline-flex;padding:8px 13px;font-size:14px}',
+      '.sca-hdr__bar{gap:12px;min-height:66px;padding:0 16px}',
+      '.sca-hdr__logo img{max-height:34px;max-width:120px}',
+      '}',
+      '.sca-hdr__lib--mobile .sca-short{display:none}',
+      '@media (max-width:479px){.sca-hdr__lib--mobile .sca-long{display:none}.sca-hdr__lib--mobile .sca-short{display:inline}}'
     ].join('');
   }
 
@@ -497,6 +578,108 @@
       });
   }
 
+  /* ------------------------------------------------------------------ header */
+  function buildHeader() {
+    var section = document.querySelector('#section-header');
+    var old = section && section.querySelector('.header');
+    if (!old || section.querySelector('.sca-hdr')) return;
+
+    var avatar = old.querySelector('.user__avatar');
+    var searchToggle = old.querySelector('.search__toggle');
+    var loggedIn = !!old.querySelector('.user');
+    var lib = CONFIG.libraryLink;
+    var arrow = '<span class="sca-arrow" aria-hidden="true">←</span>';
+    var searchIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="#FFF9EB" stroke-width="2" aria-hidden="true">' +
+      '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>';
+
+    var acct = loggedIn
+      ? [{ label: 'My Library', href: '/library' }, { label: 'Settings', href: '/settings/account' }, { label: 'Logout', href: '/logout', logout: true }]
+      : [{ label: 'Log in', href: '/login' }];
+    function acctLink(a) {
+      return '<a href="' + esc(a.href) + '"' + (a.logout ? ' data-method="delete" rel="nofollow"' : '') + '>' + esc(a.label) + '</a>';
+    }
+
+    var desk = '<a class="sca-hdr__lib" href="' + esc(lib.href) + '">' + arrow + esc(lib.label) + '</a>';
+    CONFIG.nav.forEach(function (n) {
+      if (n.items) {
+        desk += '<div class="sca-dd"><button type="button" class="sca-dd__btn" aria-expanded="false" aria-haspopup="true">' +
+          esc(n.label) + '<span class="sca-chev" aria-hidden="true"></span></button><div class="sca-dd__menu">' +
+          n.items.map(function (i) { return '<a href="' + esc(i.href) + '">' + esc(i.label) + '</a>'; }).join('') + '</div></div>';
+      } else {
+        desk += '<a class="sca-hdr__link" href="' + esc(n.href) + '">' + esc(n.label) + '</a>';
+      }
+    });
+    if (searchToggle) desk += '<button type="button" class="sca-hdr__link sca-hdr__search" aria-label="Search this course">' + searchIcon + '</button>';
+    desk += '<div class="sca-dd sca-dd--user"><button type="button" class="sca-dd__btn" aria-expanded="false" aria-haspopup="true" aria-label="Account menu">' +
+      (avatar ? '<img class="sca-hdr__avatar" alt="" src="' + esc(avatar.getAttribute('src')) + '">' : 'Account') +
+      '</button><div class="sca-dd__menu">' + acct.map(acctLink).join('') + '</div></div>';
+
+    var panel = '';
+    CONFIG.nav.forEach(function (n) {
+      if (n.items) {
+        panel += '<h4>' + esc(n.label) + '</h4>' + n.items.map(function (i) { return '<a href="' + esc(i.href) + '">' + esc(i.label) + '</a>'; }).join('');
+      } else {
+        panel += '<a class="sca-top" href="' + esc(n.href) + '">' + esc(n.label) + '</a>';
+      }
+    });
+    if (searchToggle) panel += '<a class="sca-top sca-hdr__search" href="#">Search this course</a>';
+    panel += '<hr><div class="sca-acct">' + acct.map(acctLink).join('') + '</div>';
+
+    var hdr = el('div', { 'class': 'sca-hdr' });
+    hdr.innerHTML =
+      '<div class="sca-hdr__bar">' +
+        '<a class="sca-hdr__logo" href="/"><img src="' + esc(CONFIG.logo) + '" alt="StoryCraft Academy home"></a>' +
+        '<nav class="sca-hdr__nav" aria-label="Main">' + desk + '</nav>' +
+        '<a class="sca-hdr__lib sca-hdr__lib--mobile" href="' + esc(lib.href) + '">' + arrow +
+          '<span class="sca-long">' + esc(lib.label) + '</span><span class="sca-short">' + esc(lib.short) + '</span></a>' +
+        '<button type="button" class="sca-hdr__ham" aria-label="Menu" aria-expanded="false" aria-controls="sca-hdr-panel"><span></span><span></span><span></span></button>' +
+      '</div>' +
+      '<nav class="sca-hdr__panel" id="sca-hdr-panel" aria-label="Main">' + panel + '</nav>';
+
+    old.classList.add('sca-replaced');
+    old.parentNode.insertBefore(hdr, old);
+
+    function closeAll(except) {
+      hdr.querySelectorAll('.sca-dd.is-open').forEach(function (d) {
+        if (d === except) return;
+        d.classList.remove('is-open');
+        d.querySelector('.sca-dd__btn').setAttribute('aria-expanded', 'false');
+      });
+    }
+    hdr.querySelectorAll('.sca-dd').forEach(function (dd) {
+      var btn = dd.querySelector('.sca-dd__btn');
+      var t;
+      function open() { clearTimeout(t); closeAll(dd); dd.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); }
+      function close() { dd.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); }
+      btn.addEventListener('click', function (e) { e.stopPropagation(); if (dd.classList.contains('is-open')) close(); else open(); });
+      if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+        dd.addEventListener('mouseenter', open);
+        dd.addEventListener('mouseleave', function () { t = setTimeout(close, 180); });
+      }
+    });
+    document.addEventListener('click', function (e) { if (!hdr.contains(e.target)) closeAll(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+
+    var ham = hdr.querySelector('.sca-hdr__ham');
+    var pnl = hdr.querySelector('.sca-hdr__panel');
+    ham.addEventListener('click', function () {
+      var openNow = !pnl.classList.contains('is-open');
+      pnl.classList.toggle('is-open', openNow);
+      ham.setAttribute('aria-expanded', String(openNow));
+    });
+
+    if (searchToggle) {
+      hdr.querySelectorAll('.sca-hdr__search').forEach(function (b) {
+        b.addEventListener('click', function (e) {
+          e.preventDefault();
+          pnl.classList.remove('is-open');
+          ham.setAttribute('aria-expanded', 'false');
+          searchToggle.click();
+        });
+      });
+    }
+  }
+
   /* ---------------------------------------------------------- comment prompt */
   function commentPrompt() {
     var ta = document.querySelector('#comment_body');
@@ -511,6 +694,7 @@
   safe('styles', addStyles);
 
   onReady(function () {
+    if (CONFIG.header) safe('header', buildHeader);
     if (CONFIG.fixLinks) safe('fixLinks', fixLinks);
     if (CONFIG.timestamps) safe('timestamps', linkTimestamps);
     if (CONFIG.videoEnd) safe('videoEnd', videoEndNudge);
