@@ -166,7 +166,9 @@
     css += [
       B + '{font-family:Lato,"Open Sans",Helvetica,Arial,sans-serif!important;color:#222}',
       B + 'h1,' + B + 'h2,' + B + 'h3,' + B + 'h4,' + B + '.panel__title,' + B + '.hero__title,' + B + '.media-heading',
-      '{font-family:"Cormorant Garamond",Georgia,serif!important;font-weight:600!important;letter-spacing:0!important;color:' + C.noir + '}',
+      '{font-family:"Cormorant Garamond",Georgia,serif!important;font-weight:600!important;letter-spacing:0!important}',
+      // Colour only on lesson titles; hero titles sit on the theme's coloured banner and keep its text colour.
+      B + '.panel__title{color:' + C.noir + '}',
       B + 'h5,' + B + 'h6,' + B + '.panel__sub-title{font-family:Lato,"Open Sans",sans-serif!important}',
       B + '.panel__title{font-size:2.1em;line-height:1.15}',
       B + '.panel__sub-title a{color:' + C.gold + '!important;text-transform:uppercase;letter-spacing:.08em;font-size:.8em;font-weight:700}',
