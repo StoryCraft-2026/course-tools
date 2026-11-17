@@ -8,6 +8,7 @@ One script that every StoryCraft course and recording loads. Change it here and 
 
 | Feature | What members see |
 |---|---|
+| Header | Same menu as the main site (Offerings and About Us dropdowns, Contact, account menu) plus a **Back to the Library** button. Links live in `CONFIG.nav` in `course.js` |
 | Brand styling | Cormorant Garamond headings, Lato body text, StoryCraft teal and gold on every course page |
 | Quiz answer box | Open-ended quiz questions get a six-line box instead of a one-line field |
 | Quiz autosave | Unsent quiz answers are kept in that browser for 30 days and restored if the page reloads; cleared once the quiz is submitted |
