@@ -92,19 +92,19 @@
      id: "workshop",
      name: "Self-paced pitching course",
      price: 97,
-     member: 49,
+     member: 79,
      desc: "Video lessons and worksheets: build a logline, choose comps, and shape a verbal pitch."
     }, {
      id: "practice",
      name: "Practice session with a story coach",
      price: 97,
-     member: 49,
+     member: 79,
      desc: "A 30-minute practice pitch with a StoryCraft story coach, booked on the coach's calendar at a time that works for you before Pitch Day."
     }, {
      id: "bundle",
      name: "Pitch Package",
-     price: 135,
-     member: 89,
+     price: 179,
+     member: 143,
      desc: "The self-paced course plus a 30-minute practice session.",
      feature: !0
     }, {
