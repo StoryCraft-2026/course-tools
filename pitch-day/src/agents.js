@@ -52,14 +52,15 @@
     d = [
      ["How many pitches will I take?", "You set a cap on the form, anywhere from 1 to 30. Writers can only book inside the hours you open, and we never go over your cap."],
      ["Can I sign up for more than one day?", "Yes. Each Pitch Day runs on a Friday and a Saturday, and each day has its own tab with its own hours and pitch cap. Sign up for one day or all of them, and you're paid for every pitch you take. You can also add days or hours later: sign in to your Agent Portal with your StoryCraft account on any device, and your details are already there."],
+     ["What hours can I take pitches?", "Pitches run 7:00 AM to 6:00 PM Pacific (10:00 AM to 9:00 PM Eastern) on both days. Choose any of those hours, shown in your own time zone on the form. On Saturdays, no one pitches from 8:45 to 10:15 AM Pacific while the First Pages Slam runs, so the hours on either side fit 3 pitches instead of 4."],
      ["How long is each meeting?", "Ten minutes. Writers keep their pitch to 5 minutes or less, and the rest is your questions and feedback. You get 5 minutes between writers for the scorecard. Some writers book two times in a row with you, to pitch a second book or ask questions beyond the book they're pitching."],
      ["How am I paid?", "By direct deposit (ACH) within XYZ days of Pitch Day. After you sign up, we send a short contract. Once it's signed, you get our ACH payment sign-up with a W-9."],
      ["Do I tell writers about requests on the call?", "Yes. Give each writer a yes or no on requesting pages before the call ends. Your 60-second scorecard, filled out right after each session, adds your notes to their Pitch Report."],
      ["What do I get before Pitch Day?", "Five days before the event, your schedule and a one-page packet for each writer appear in your Agent Portal: logline, comps, genre and word count. For Live Pre-Read sessions, you also get the query letter and first 5 pages ahead of time."],
      ["How does the scorecard work?", "Your packet opens on your phone or computer from your Agent Portal. Under each writer's one-page is a Score this pitch button. Tap it when the call ends: the writer's name and time are already filled in, and it takes about a minute."],
      ["What are true beginners?", "Writers who want practice or a conversation instead of a full pitch. If you tick the box on the form, writers can filter for you, and those meetings are marked in your packet."],
-     ["What are pro-bono times?", "If you opt in, you set aside 2 of your times each Pitch Day for writers from historically underrepresented communities, including BIPOC and LGBTQ+ writers. Those 2 times are unpaid. We review applications, and approved writers book open pro-bono times first come, first served."],
-     ["What is the First Pages Slam?", "A paid panel on Saturdays at 9:00 AM Pacific. A moderator reads writers' first pages aloud to three agents, and each agent says where they'd stop reading and why. Opt in on the form if you'd like to sit on the panel. We keep your pitch hours clear during it."],
+     ["What are pro-bono times?", "If you opt in, you set aside 2 of your times each Pitch Day for writers from historically underrepresented communities, including BIPOC and LGBTQ+ writers. Those 2 times are unpaid. Approved writers book open pro-bono times first come, first served."],
+     ["What is the First Pages Slam?", "A paid panel on Saturdays at 9:00 AM Pacific. A moderator reads writers' first pages aloud to three agents, and each agent says where they'd stop reading and why. Opt in on the form if you'd like to sit on the panel. No one pitches from 8:45 to 10:15 AM Pacific on Saturdays, so the whole event can watch."],
      ["What do I get after Pitch Day?", "Your Pitch Day Report, the evening of the event. It's built from your scorecards and lists every writer you asked for a full, a partial or a query with pages, with their title, logline, genre, word count, contact email and your own note, plus the writers you passed on. Requested pages come in marked Pitch Day, so you can match them to the report."],
      ["What is the AI commitment?", "Every Pitch Day agent agrees not to put writers' query letters, pages, pitches or packets into any AI tool. We tell writers this on the booking page, and it's in your contract. Writers also confirm that the work they share is their own, not AI-generated."],
      ["What time zone are the times in?", "The form shows Pitch Day hours in your own time zone. Pick a different one from the menu if you'll be traveling. We store everything in Eastern and send your schedule in your time zone."],
@@ -170,22 +171,25 @@
        var m = a.getAttribute("data-apd-quick");
        if ("copy" === m) {
         var g = I(),
-         b = H(p.tz),
+         b = ST(),
          w = g.hours.map(function(e) {
           return Math.round((e - b) / f)
          });
         n.forEach(function(e) {
          if (e.id !== p.cur) {
-          var t = H(p.tz, e.id);
+          var t = ST(e.id);
           z(e.id).hours = w.map(function(e) {
            return t + e * f
+          }).filter(function(t) {
+           return 1 !== BX(e.id, t)
           }), z(e.id).cap = g.cap
          }
         })
        } else {
-        for (var k = [], A = 0; A < 16; A++) {
-         var S = 5 + A;
-         ("all" === m || "am" === m && S < 12 || "pm" === m && S >= 12 && S < 17 || "eve" === m && S >= 17) && k.push(O(A).getTime())
+        for (var k = [], A = 0; A < 11; A++) {
+         var Y0 = O(A).getTime(),
+          S = new Date(Y0 + _(p.tz, Y0)).getUTCHours();
+         1 !== BX(p.cur, Y0) && ("all" === m || "am" === m && S < 12 || "pm" === m && S >= 12 && S < 17 || "eve" === m && S >= 17) && k.push(Y0)
         }
         I().hours = k
        }
@@ -364,7 +368,7 @@
      var u = [].every.call(r.querySelectorAll(".apd-opts"), function(e) {
       return e.querySelector('[aria-pressed="true"]')
      });
-     o("apd-scmsg").innerHTML = u ? '<div class="apd-ok">Sent. (This is a demo, so nothing was sent.) Your answers join the writer\'s other agents in their Pitch Report. <button type="button" class="apd-linkbtn" style="margin:6px 0 0;display:block" data-apd-tab="writer">See what the writer gets &rarr;</button></div>' : "<div>Tap one answer in each row to finish.</div>"
+     u && SC(), o("apd-scmsg").innerHTML = u ? '<div class="apd-ok">Sent. (This is a demo, so nothing was sent.) Your answers join the writer\'s other agents in their Pitch Report. <button type="button" class="apd-linkbtn" style="margin:6px 0 0;display:block" data-apd-tab="writer">See what the writer gets &rarr;</button></div>' : "<div>Tap one answer in each row to finish.</div>"
     }
    }), document.addEventListener("keydown", function(e) {
     if (o("apd-m-sc").classList.contains("apd-open"))
@@ -433,6 +437,71 @@
 
   function w(e) {
    return "number" == typeof e && isFinite(e)
+  }
+
+  function SC() {
+   var t = [].map.call(o("apd-p-fill").querySelectorAll(".apd-opts"), function(e) {
+     return [].filter.call(e.querySelectorAll(".apd-o"), function(e) {
+      return "true" === e.getAttribute("aria-pressed")
+     }).map(function(e) {
+      return e.textContent
+     })
+    }),
+    a = +t[0][0],
+    n = t[1][0],
+    r = t[2][0],
+    i = t[3],
+    s = t[4][0],
+    c = t[5][0],
+    d = o("apd-sc-work").value.trim(),
+    u = o("apd-sc-fix").value.trim(),
+    l = {
+     "Send the full": "full",
+     "Send a partial": "part",
+     "Query me with pages": "qry"
+    } [c] || "",
+    h = "Fine" !== i[0],
+    m = function(e, t) {
+     return '<span class="apd-pill ' + t + '">' + A(e) + "</span>"
+    },
+    g = function(e) {
+     for (var t = '<span class="apd-dots" aria-label="Hook ' + e + ' of 4">', a = 1; a <= 4; a++) t += '<i class="' + (a <= e ? "on" : "") + '"></i>';
+     return t + "</span>"
+    };
+   o("apd-w-you").innerHTML = '<h4>Agent B<span class="apd-youtag">You</span></h4><p class="apd-rmeta">Your scorecard</p><div class="apd-rline"><span>Hook</span>' + g(a) + '</div><div class="apd-rline"><span>Stakes</span>' + m(n, {
+    Clear: "ok",
+    "Partly clear": "qry"
+   } [n] || "no") + '</div><div class="apd-rline"><span>Comps</span>' + m(r, {
+    "On target": "ok",
+    Missing: "no"
+   } [r] || "qry") + '</div><div class="apd-rline"><span>Category and length</span>' + m(i.join(" · "), h ? "qry" : "ok") + '</div><div class="apd-rline"><span>Fit</span>' + m(s, {
+    "Fits my list": "ok",
+    "Not ready yet": "qry"
+   } [s] || "no") + "</div>" + (d ? '<div class="apd-rquote"><b>Working</b>' + A(d) + "</div>" : "") + (u ? '<div class="apd-rquote"><b>Change before querying</b>' + A(u) + "</div>" : "") + '<div class="apd-rline"><span>Next step</span>' + (l ? m(c, "full") : m("No request this time", "no")) + "</div>" + (l ? '<p class="apd-rsend"><b>What to send:</b> ' + {
+    full: "Send the full manuscript through QueryManager, noting Pitch Day in the first line.",
+    part: "Send the query and first 50 pages through QueryManager, noting Pitch Day in the first line.",
+    qry: "Revise, then query with your first 10 pages through QueryManager, noting Pitch Day in the first line."
+   } [l] + "</p>" : "");
+   var f = 2 + (a >= 3 ? 1 : 0),
+    p = 1 + ("On target" !== r ? 1 : 0),
+    y = 1 + (l ? 1 : 0),
+    v = ["1 full" + ("full" === l ? " + 1 full" : ""), "part" === l ? "1 partial" : "", "qry" === l ? "1 query with pages" : ""].filter(Boolean).join(", ").replace("1 full + 1 full", "2 full");
+   o("apd-w-req").textContent = y + (1 === y ? " request" : " requests"), o("apd-w-sum").innerHTML = '<div class="apd-rstat"><b>' + f + ' of 3</b><span>rated the hook 3 or higher</span></div><div class="apd-rstat"><b>' + p + ' of 3</b><span>flagged the comps</span></div><div class="apd-rstat"><b>' + (h ? 1 : 0) + ' of 3</b><span>flagged category or length</span></div><div class="apd-rstat"><b>' + y + "</b><span>" + (1 === y ? "request" : "requests") + ": " + v + "</span></div>", o("apd-w-next").textContent = p > 1 ? "Two agents flagged the comps. Refresh them before you send " + (y > 1 ? "either request" : "the requested pages") + ". The Pitch Package course covers choosing recent comps." : "Start with the change that comes up in more than one agent's notes, then send " + (y > 1 ? "your requests" : "the requested pages") + ".";
+   var w = o("apd-r-you"),
+    b = o("apd-r-norow");
+   l ? (b && b.parentNode.removeChild(b), w.style.display = "", w.innerHTML = m({
+    full: "Full requested",
+    part: "Partial requested",
+    qry: "Query me with pages"
+   } [l], l) + '<h4>The Salt Archivist</h4><p class="apd-rmeta">M. Alvarez · 10:15 AM · Adult historical fantasy · 92,000 words</p><p class="apd-rlog">A coastal archivist who erases memories for pay finds her own name in a client\'s ledger, and learns someone paid to make her forget.</p><div class="apd-rline"><span>Your hook score</span>' + g(a) + "</div>" + (d || u ? '<div class="apd-rquote"><b>Your note</b>' + A(d || u) + "</div>" : "") + '<p class="apd-rsend"><b>Sending:</b> ' + {
+    full: "The full manuscript through your QueryManager, with Pitch Day in the first line.",
+    part: "First 50 pages through your QueryManager, with Pitch Day in the first line.",
+    qry: "A query with the first 10 pages through your QueryManager after revising."
+   } [l] + "</p>") : (w.style.display = "none", b || ((b = document.createElement("div")).id = "apd-r-norow", o("apd-r-no").insertBefore(b, o("apd-r-no").firstChild)), b.innerHTML = "<span>The Salt Archivist<small>10:15 AM · Adult historical fantasy · 92,000</small></span>" + m("Not ready yet" === s ? "Not ready yet" : "Not for my list", "no"));
+   var k = 1 + ("full" === l ? 1 : 0),
+    x = 1 + ("part" === l ? 1 : 0),
+    E = 1 + ("qry" === l ? 1 : 0);
+   o("apd-r-full").textContent = k, o("apd-r-part").textContent = x, o("apd-r-qry").textContent = E, o("apd-r-full").nextSibling.textContent = 1 === k ? "full requested" : "fulls requested", o("apd-r-part").nextSibling.textContent = 1 === x ? "partial requested" : "partials requested", o("apd-r-req").textContent = k + x + E + " requests", o("apd-r-noh").textContent = "No request this time · " + (l ? 8 : 9)
   }
 
   function be(t) {
@@ -583,24 +652,38 @@
    }), Date.UTC(+a.year, +a.month - 1, +a.day, +a.hour % 24, +a.minute) - t
   }
 
-  function H(e, t) {
+  function H(e, t, h) {
    var a = D(P(t || p.cur).iso),
-    n = Date.UTC(a[0], a[1], a[2], 5),
+    n = Date.UTC(a[0], a[1], a[2], null == h ? 5 : h),
     r = n - _(e, n);
    return n - _(e, r)
   }
 
+  function ST(t) {
+   return H("America/Los_Angeles", t || p.cur, 7)
+  }
+
+  function SA(t) {
+   return 6 === new Date(P(t).iso + "T12:00:00Z").getUTCDay()
+  }
+
+  function BX(t, a) {
+   if (!SA(t)) return 0;
+   var n = H("America/Los_Angeles", t, 9);
+   return a === n ? 1 : a === n - f || a === n + f ? 2 : 0
+  }
+
   function O(e, t) {
-   return new Date(H(p.tz, t) + e * f)
+   return new Date(ST(t) + e * f)
   }
 
   function j() {
    n.forEach(function(e) {
-    var t = H(p.tz, e.id),
-     a = t + 16 * f,
-     n = z(e.id);
-    n.hours = n.hours.filter(function(e) {
-     return e >= t && e < a
+    var t = ST(e.id),
+     a = t + 11 * f,
+     r = z(e.id);
+    r.hours = r.hours.filter(function(n) {
+     return n >= t && n < a && 1 !== BX(e.id, n)
     })
    })
   }
@@ -623,7 +706,10 @@
   }
 
   function F(e) {
-   var t = 4 * z(e || p.cur).hours.length,
+   var r = e || p.cur,
+    t = z(r).hours.reduce(function(e, t) {
+     return e + (2 === BX(r, t) ? 3 : 4)
+    }, 0),
     a = +(o("apd-brk").value || 6);
    return Math.floor(t * a / (a + 1))
   }
@@ -665,14 +751,18 @@
   }
 
   function J() {
-   for (var e = p.tz, t = "", a = "America/New_York", r = I().hours, i = 0; i < 16; i++) {
+   for (var e = p.tz, t = "", a = "America/New_York", r = I().hours, i = 0; i < 11; i++) {
     var s = O(i),
      c = new Date(s.getTime() + f),
      d = s.getTime(),
      l = r.indexOf(d) >= 0,
-     h = x(s, a);
-    t += '<button type="button" class="apd-hr" data-apd-hr="' + d + '" aria-pressed="' + l + '">' + (e !== a && x(q(p.cur), "UTC") !== h ? '<span class="apd-flag">' + h + " ET</span>" : "") + "<b>" + W(s, c, e) + "</b><small>" + (e === a ? "Eastern" : W(s, c, a) + " ET") + "</small></button>"
+     h = x(s, e),
+     bx = BX(p.cur, d);
+    t += 1 === bx ? '<button type="button" class="apd-hr apd-slamhr" disabled aria-label="' + W(s, c, e) + ': First Pages Slam, no pitches"><b>First Pages Slam</b><small>' + W(s, c, e) + "</small></button>" : '<button type="button" class="apd-hr" data-apd-hr="' + d + '" aria-pressed="' + l + '">' + (x(q(p.cur), "UTC") !== h ? '<span class="apd-flag">' + h + "</span>" : "") + "<b>" + W(s, c, e) + "</b><small>" + (e === a ? "Eastern" : W(s, c, a) + " ET") + "</small>" + (2 === bx ? '<span class="apd-three">3 pitches · Slam</span>' : "") + "</button>"
    }
+   var sn = o("apd-slamnote"),
+    sm = H("America/Los_Angeles", p.cur, 9);
+   SA(p.cur) ? (sn.innerHTML = "<b>Saturday has a break for the First Pages Slam.</b> No pitches from " + C(new Date(sm - 9e5), e) + " to " + C(new Date(sm + 45e5), e) + " " + L(new Date(sm), e) + " (8:45 to 10:15 AM Pacific). The hours on either side fit 3 pitches instead of 4.", sn.classList.add("apd-show")) : (sn.innerHTML = "", sn.classList.remove("apd-show"));
    o("apd-hours").innerHTML = t, o("apd-tznote").textContent = e === u ? "" : "(your device says " + u.replace(/_/g, " ") + ")", G(), Q(),
     function() {
      if (!o("apd-sess")) return;

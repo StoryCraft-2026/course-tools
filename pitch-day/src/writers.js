@@ -9,7 +9,7 @@
      initials: "NM",
      photo: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148720201/images/fc48121-fa64-5b0c-46ea-e6e05f64423_Screenshot_2026-11-19_at_1.52.34_PM.png",
      photoPos: "50% 30%",
-     startUTC: "2027-05-14T13:00:00Z",
+     startUTC: "2027-05-14T14:00:00Z",
      cap: 12,
      booked: [1, 4, 5, 8, 10],
      date: "2027-05-14",
@@ -91,13 +91,13 @@
     s = [{
      id: "workshop",
      name: "Self-paced pitching course",
-     price: 75,
+     price: 97,
      member: 49,
      desc: "Video lessons and worksheets: build a logline, choose comps, and shape a verbal pitch."
     }, {
      id: "practice",
      name: "Practice session with a story coach",
-     price: 75,
+     price: 97,
      member: 49,
      desc: "A 30-minute practice pitch with a StoryCraft story coach, booked on the coach's calendar at a time that works for you before Pitch Day."
     }, {
@@ -110,8 +110,8 @@
     }, {
      id: "feedbackinfo",
      name: "Live Pre-Read session",
-     price: 29,
-     member: 29,
+     price: 19,
+     member: 19,
      desc: "Hate having to perform on the spot? Send your query letter and first 5 pages ahead of time, and use your ten minutes for feedback and a request decision from the agent. Add it to any pitch in your cart.",
      info: !0
     }, {
@@ -129,29 +129,30 @@
      group: "written",
      desc: "After Pitch Day, a participating agent reads your first 5 pages and sends back written notes before you query."
     }],
-    n = 29,
-    SL = 25,
+    n = 19,
+    SL = 24,
+    PP = 39,
     GR = "https://zoom.us/j/STORYCRAFT-PITCH-DAY",
     EV = [{
      id: "2027-05",
      days: ["2027-05-14", "2027-05-15"],
      slam: "2027-05-15T16:00:00Z",
-     left: 14
+     left: 7
     }, {
      id: "2027-06",
      days: ["2027-06-11", "2027-06-12"],
      slam: "2027-06-12T16:00:00Z",
-     left: 20
+     left: 10
     }, {
      id: "2027-10",
      days: ["2027-10-15", "2027-10-16"],
      slam: "2027-10-16T16:00:00Z",
-     left: 20
+     left: 10
     }, {
      id: "2027-11",
      days: ["2027-11-12", "2027-11-13"],
      slam: "2027-11-13T17:00:00Z",
-     left: 20
+     left: 10
     }],
     i = [{
      id: "p1",
@@ -263,7 +264,10 @@
     }), e.addEventListener("click", function(e) {
      var t, s, n = e.target.closest("[data-spd-slot],[data-spd-agent],[data-spd-wait],[data-spd-addon],[data-spd-rmp],[data-spd-rma],[data-spd-open],[data-spd-close],[data-spd-close-drawer],[data-spd-tab],[data-spd-panel],[data-spd-pre],[data-spd-date],[data-spd-notify],[data-spd-slam],[data-spd-rms],[data-spd-rmb],[data-spd-pb]");
      if (n)
-      if (n.hasAttribute("data-spd-date")) l.date = n.getAttribute("data-spd-date"), j();
+      if (n.hasAttribute("data-spd-date")) l.date = n.getAttribute("data-spd-date"), j(), n.hasAttribute("data-spd-jump") && h("spd-agents").scrollIntoView({
+       behavior: "smooth",
+       block: "start"
+      });
       else if (n.hasAttribute("data-spd-notify")) ! function(e) {
       h("spd-m-wait-title").textContent = "Get notified", h("spd-m-wait-body").innerHTML = "<p>Agents for " + T(ER(e)) + ' are confirming now. Leave your email and we\'ll tell you as soon as their times open.</p><label for="spd-wait-email" style="font-weight:700;font-size:14px">Email</label><input id="spd-wait-email" class="spd-field" type="email" placeholder="you@example.com" autocomplete="email"><button class="spd-btn spd-btn-gold" type="button" id="spd-wait-go">Tell me when it opens</button>', B("spd-m-wait"), h("spd-wait-go").onclick = function() {
        var t = h("spd-wait-email").value.trim();
@@ -339,7 +343,7 @@
       /^\S+@\S+\.\S+$/.test(e) ? h("spd-m-wait-body").innerHTML = '<p class="spd-serif" style="font-size:26px">You\'re on the list.</p><p>We\'ll email <b>' + T(e) + "</b> the moment a time with " + T(s.name) + " opens. (Demo: nothing was sent.)</p>" : A("Enter a valid email")
      };
      else if (n.hasAttribute("data-spd-addon")) ! function(e) {
-      l.addons[e] ? (delete l.addons[e], A("Removed from cart"), j()) : ("bundle" === e && (delete l.addons.workshop, delete l.addons.practice), "workshop" === e && l.addons.practice || "practice" === e && l.addons.workshop ? (delete l.addons.workshop, delete l.addons.practice, l.addons.bundle = !0, A("Switched to the Pitch Package: you save " + (l.member ? "$9" : "$15")), j(!0)) : "workshop" !== e && "practice" !== e || !l.addons.bundle ? (l.addons[e] = !0, A("Added to cart"), j(!0)) : A("Already in your Pitch Package"))
+      l.addons[e] ? (delete l.addons[e], A("Removed from cart"), j()) : ("bundle" === e && (delete l.addons.workshop, delete l.addons.practice), "workshop" === e && l.addons.practice || "practice" === e && l.addons.workshop ? (delete l.addons.workshop, delete l.addons.practice, l.addons.bundle = !0, A("Switched to the Pitch Package: you save " + y(SV())), j(!0)) : "workshop" !== e && "practice" !== e || !l.addons.bundle ? (l.addons[e] = !0, A("Added to cart"), j(!0)) : A("Already in your Pitch Package"))
      }(n.getAttribute("data-spd-addon"));
      else if (n.hasAttribute("data-spd-pre")) {
       var o = +n.getAttribute("data-spd-pre");
@@ -433,16 +437,16 @@
       }, t.appendChild(s)
      })
     }(), t = h("spd-faq"), [
-     ["Do I need to buy a conference ticket?", "No. You pay $45 per pitch time and add only the prep you want. There is no registration fee."],
+     ["Do I need to buy a conference ticket?", "No. You pay $39 per pitch time and add only the prep you want. There is no registration fee."],
      ["How does a pitch time work?", "Each time is 15 minutes. Join the StoryCraft Zoom at your start time: a producer checks your camera and mic in the green room, then moves you into your agent's room for 10 minutes. Keep your pitch to 5 minutes or less and use the rest for the agent's questions and feedback."],
-     ["Can I book more than one time with the same agent?", "Yes, if the times are back-to-back. Book two or more in a row to pitch a second book, or to talk through questions beyond the book you're pitching. Each time is $45, and you still keep each pitch to 5 minutes or less."],
-     ["I'm brand new to this. Is Pitch Day for me?", "Yes. Turn on \"Only show agents open to true beginners\" above the agent board. When you book one of those agents, tick \"I'm a true beginner\" in your cart, and the agent will treat your time as practice or a conversation instead of a full pitch."],
+     ["Can I book more than one time with the same agent?", "Yes, if the times are back-to-back. Book two or more in a row to pitch a second book, or to talk through questions beyond the book you're pitching. Each time is $39, and you still keep each pitch to 5 minutes or less."],
+     ["I'm brand new to this. Is Pitch Day for me?", "Yes. If you've never pitched an agent, or your manuscript isn't finished yet, you're a true beginner. Turn on \"Only show agents open to true beginners\" above the agent board. When you book one of those agents, tick \"I'm a true beginner\" in your cart, and the agent will treat your time as practice or a conversation instead of a full pitch."],
      ["What should I have ready?", "A finished or nearly finished manuscript. After you book, sign in to My Pitch Day and add your book details: title, genre, word count, logline, two comps and a short bio. Every agent you meet sees them before your time, so they come in prepared. If you choose a Live Pre-Read session, you upload your query letter and first 5 pages there too."],
      ["What is My Pitch Day?", "Your Pitch Day page inside your StoryCraft account. Sign in on any device to see your upcoming times, change your schedule, update your book details and watch the welcome video, which walks you through the day and how to pitch well."],
-     ["What is the First Pages Slam?", "A live panel on Saturday at 9:00 AM Pacific. A moderator reads submitted first pages aloud to three agents, and each agent says where they'd stop reading and why. Watching is free with any Pitch Day booking. Submitting your first page is $25, and spots are limited."],
+     ["What is the First Pages Slam?", "A live panel on Saturdays at 9:00 AM Pacific. A moderator reads submitted first pages aloud to three agents, and each agent says where they'd stop reading and why. Watching is free with any Pitch Day booking. Submitting your first page is $24, and only 10 pages are read at each Slam. No pitches run from 8:45 to 10:15 AM Pacific on Saturdays, so everyone can watch."],
      ["Do you offer free pitch times?", "Yes. Some agents set aside two pro-bono pitch times each Pitch Day for writers from historically underrepresented communities, including BIPOC and LGBTQ+ writers. Apply on this page for up to 2 free times. Approved writers book open pro-bono times first come, first served."],
      ["How does the Pitch Report work?", "After each meeting, the agent completes a short scorecard: hook, stakes, comps, genre and word count, one thing that works, one thing to change, and their next step. You get one combined report within 48 hours."],
-     ["Can I get feedback instead of pitching?", "Yes. Hate having to perform on the spot? Add a Live Pre-Read session to any pitch in your cart (+$29). Send your query letter and first 5 pages ahead, and use your time with the agent for feedback and a request decision. You still get a Pitch Report."],
+     ["Can I get feedback instead of pitching?", "Yes. Hate having to perform on the spot? Add a Live Pre-Read session to any pitch in your cart (+$19). Send your query letter and first 5 pages ahead, and use your time with the agent for feedback and a request decision. You still get a Pitch Report."],
      ["Can I pitch on more than one weekend?", "Yes. Pitch Day runs four weekends in 2027, each on a Friday and Saturday: May 14-15, June 11-12, October 15-16 and November 12-13. Switch weekends at the top of the agent board. Each one has its own agents and times, and everything goes in one cart."],
      ["Will agents put my pages into AI?", "No. Every agent we work with has committed not to put writers' query letters, pages or pitches into AI tools. It's part of their agreement with us. We ask the same of writers: at checkout, you confirm the work you share is your own and not AI-generated."],
      ["Will an agent request my manuscript?", "Maybe, but no one can promise that. Either way, you get a Pitch Report with the agent's notes."],
@@ -452,17 +456,33 @@
      ["What if an agent cancels?", "We email you right away. In My Pitch Day, choose first pick of open times with another agent, credit toward the next Pitch Day, or a full refund for that time."],
      ["Who will I meet besides the agents?", "Every booking includes the StoryCraft Writers Collective, with dedicated Pitch Day forums and group pitching hours. Practice your pitch with other writers before the day, compare notes after and post your requests."],
      ["Is there a code of conduct?", "Yes. It covers writers, agents and our team, and everyone agrees to it before they take part. You can read it in the Straight Answers section of this page."],
-     ["What time zone are the times in?", "Times on this page are shown in your own time zone, set by your device. The First Pages Slam starts at 9:00 AM Pacific."]
+     ["What time zone are the times in?", "Times on this page are shown in your own time zone, set by your device. Pitches run 7:00 AM to 6:00 PM Pacific (10:00 AM to 9:00 PM Eastern) both days. The First Pages Slam starts at 9:00 AM Pacific on Saturdays."]
     ].forEach(function(e, a) {
      var s = document.createElement("div");
      s.className = "spd-q", s.innerHTML = '<button type="button" aria-expanded="false" aria-controls="spd-a' + a + '">' + T(e[0]) + '</button><div class="spd-a" id="spd-a' + a + '">' + T(e[1]) + "</div>", s.querySelector("button").onclick = function() {
       this.setAttribute("aria-expanded", "true" !== this.getAttribute("aria-expanded"))
      }, t.appendChild(s)
-    }), h("spd-m-coc-body").innerHTML = COC(), j()
+    }), h("spd-dates").innerHTML = EV.map(function(e) {
+     var t = D(e.days[0]),
+      a = D(e.days[1]),
+      s = {
+       timeZone: "UTC"
+      };
+     return '<button type="button" class="spd-dt" data-spd-date="' + e.id + '" data-spd-jump aria-label="' + T(KU(e.days[0]) + " and " + KU(e.days[1])) + '"><span>' + t.toLocaleDateString("en-US", {
+      month: "short",
+      timeZone: "UTC"
+     }) + "</span><b>" + t.getUTCDate() + "&ndash;" + a.getUTCDate() + "</b><small>" + t.toLocaleDateString("en-US", {
+      weekday: "short",
+      timeZone: "UTC"
+     }) + " + " + a.toLocaleDateString("en-US", {
+      weekday: "short",
+      timeZone: "UTC"
+     }) + "</small></button>"
+    }).join(""), h("spd-m-coc-body").innerHTML = COC(), j()
   }
 
   function b(e) {
-   return '<div class="spd-memnote"><p><b>Member prices apply when you sign in with your Academy account.</b>' + (e ? "" : " Not a member yet? The Academy is $33 a month and saves you $26 on the course and $26 on a practice session.") + '</p><a class="spd-btn spd-btn-gold spd-btn-sm" href="' + d + '">Sign in</a><a class="spd-btn spd-btn-line spd-btn-sm" href="' + r + '" target="_blank" rel="noopener">Join the Academy · $33/month</a></div>'
+   return '<div class="spd-memnote"><p><b>Member prices apply when you sign in with your Academy account.</b>' + (e ? "" : " Not a member yet? The Academy is $33 a month and saves you " + y(s[0].price - s[0].member) + " on the course and " + y(s[1].price - s[1].member) + " on a practice session.") + '</p><a class="spd-btn spd-btn-gold spd-btn-sm" href="' + d + '">Sign in</a><a class="spd-btn spd-btn-line spd-btn-sm" href="' + r + '" target="_blank" rel="noopener">Join the Academy · $33/month</a></div>'
   }
 
   function y(e) {
@@ -470,8 +490,28 @@
   }
 
   function v(e) {
-   for (var t = [], a = new Date(e.startUTC).getTime(), s = 0; s < e.cap; s++) t.push(new Date(a + 15 * s * 6e4 + 15 * Math.floor(s / 6) * 6e4));
+   var t = [],
+    a = GE(EVO(e.date)),
+    s = new Date(a.slam).getTime(),
+    n = a.days.indexOf(e.date),
+    i = s - 72e5 - (1 === n ? 0 : 864e5),
+    o = i + 396e5,
+    r = Math.max(new Date(e.startUTC).getTime(), i);
+   for (; t.length < e.cap;) {
+    t.length && t.length % 6 == 0 && (r += 9e5), 1 === n && r < s + 45e5 && r + 9e5 > s - 9e5 && (r = s + 45e5);
+    if (r + 9e5 > o) break;
+    t.push(new Date(r)), r += 9e5
+   }
    return t
+  }
+
+  function SV() {
+   var e = function(e) {
+    return O(s.filter(function(t) {
+     return t.id === e
+    })[0])
+   };
+   return e("workshop") + e("practice") - e("bundle")
   }
 
   function w(e) {
@@ -682,7 +722,7 @@
      k: "p",
      p: t,
      a: s,
-     amt: 45
+     amt: PP
     }), t.fb && e.push({
      k: "fb",
      p: t,
@@ -716,12 +756,12 @@
      var e = h("spd-dbody"),
       t = "";
      if (CN()) {
-      l.pitches.length && (t += '<div class="spd-dsub">Pitch times · ' + y(45) + " each</div>", BL().forEach(function(b) {
+      l.pitches.length && (t += '<div class="spd-dsub">Pitch times · ' + y(PP) + " each</div>", BL().forEach(function(b) {
        var s = b.i0,
         e = l.pitches[s],
         i = N(e.agent),
         o = new Date(e.time);
-       t += '<div class="spd-ditem"><div class="spd-ditem-top"><span>' + T(i.name) + "<small>" + R(o) + " · " + 15 * b.n + " min" + (b.n > 1 ? " · " + b.n + " back-to-back times" : "") + " · " + T(i.agency) + "</small></span><span>" + y(45 * b.n) + (e.fb ? " + " + y(n) : "") + "</span></div>" + (b.n > 1 ? '<div class="spd-use"><label for="spd-use-' + s + '">What\'s the extra time for?</label><select class="spd-field" id="spd-use-' + s + '" data-spd-use="' + s + '"><option value="">Choose one</option><option value="book2"' + ("book2" === e.use ? " selected" : "") + '>Pitching a second book</option><option value="talk"' + ("talk" === e.use ? " selected" : "") + ">Questions beyond the book I'm pitching</option></select></div>" : "") + (i.beginner ? '<label class="spd-chk spd-chk-top"><input type="checkbox" data-spd-begp="' + s + '" ' + (e.beg ? "checked" : "") + "><span>I'm a true beginner: I'd like practice or a conversation instead of a full pitch</span></label>" : "") + '<label class="spd-chk spd-chk-top"><input type="checkbox" data-spd-fb="' + s + '" ' + (e.fb ? "checked" : "") + "><span>Make this a Live Pre-Read session (+" + y(n) + '): send your query letter and first 5 pages ahead and use your time with the agent for feedback and a request decision</span></label><button class="spd-rm" type="button" data-spd-rmb="' + e.agent + "|" + b.start + "|" + b.end + '">Remove</button></div>'
+       t += '<div class="spd-ditem"><div class="spd-ditem-top"><span>' + T(i.name) + "<small>" + R(o) + " · " + 15 * b.n + " min" + (b.n > 1 ? " · " + b.n + " back-to-back times" : "") + " · " + T(i.agency) + "</small></span><span>" + y(PP * b.n) + (e.fb ? " + " + y(n) : "") + "</span></div>" + (b.n > 1 ? '<div class="spd-use"><label for="spd-use-' + s + '">What\'s the extra time for?</label><select class="spd-field" id="spd-use-' + s + '" data-spd-use="' + s + '"><option value="">Choose one</option><option value="book2"' + ("book2" === e.use ? " selected" : "") + '>Pitching a second book</option><option value="talk"' + ("talk" === e.use ? " selected" : "") + ">Questions beyond the book I'm pitching</option></select></div>" : "") + (i.beginner ? '<label class="spd-chk spd-chk-top"><input type="checkbox" data-spd-begp="' + s + '" ' + (e.beg ? "checked" : "") + "><span>I'm a true beginner: I'd like practice or a conversation instead of a full pitch</span></label>" : "") + '<label class="spd-chk spd-chk-top"><input type="checkbox" data-spd-fb="' + s + '" ' + (e.fb ? "checked" : "") + "><span>Make this a Live Pre-Read session (+" + y(n) + '): send your query letter and first 5 pages ahead and use your time with the agent for feedback and a request decision</span></label><button class="spd-rm" type="button" data-spd-rmb="' + e.agent + "|" + b.start + "|" + b.end + '">Remove</button></div>'
       }));
       var i = s.filter(function(e) {
        return l.addons[e.id]
@@ -879,7 +919,7 @@
 
   function DH(e, t, a) {
    var s = document.createElement("div");
-   return s.className = "spd-dayhead", s.innerHTML = "<b>" + T(KU(e)) + "</b><span>" + t + (1 === t ? " agent" : " agents") + (a ? " · First Pages Slam at " + T(w(SD(l.date))) + " your time" : "") + "</span>", s
+   return s.className = "spd-dayhead", s.innerHTML = "<b>" + T(KU(e)) + "</b><span>" + t + (1 === t ? " agent" : " agents") + (a ? " · First Pages Slam at " + T(w(SD(l.date))) + " your time · no pitches " + T(w(new Date(SD(l.date).getTime() - 9e5))) + " to " + T(w(new Date(SD(l.date).getTime() + 45e5))) : "") + "</span>", s
   }
 
   function DUR(e) {
@@ -909,7 +949,7 @@
    e && (e.innerHTML = EV.map(function(t) {
     var a = l.slam.indexOf(t.id) > -1,
      s = q(t.id).length;
-    return '<button type="button" class="spd-sessbtn' + (a ? " spd-added" : "") + '" data-spd-slam="' + t.id + '" aria-pressed="' + a + '"' + (s ? "" : " disabled") + ">" + T(R(SD(t.id))) + " · " + (s ? t.left + " of 20 spots left" : "Opens when agents are announced") + (a ? " ✓ Added" : "") + "</button>"
+    return '<button type="button" class="spd-sessbtn' + (a ? " spd-added" : "") + '" data-spd-slam="' + t.id + '" aria-pressed="' + a + '"' + (s ? "" : " disabled") + ">" + T(R(SD(t.id))) + " · " + (s ? t.left + " of 10 spots left" : "Opens when agents are announced") + (a ? " ✓ Added" : "") + "</button>"
    }).join("") + '<p class="spd-tznote">Shown in your time zone (' + T(u.replace(/_/g, " ")) + "). The Slam starts at 9:00 AM Pacific.</p>");
    var t = h("spd-pbcount");
    if (t) {
@@ -921,11 +961,21 @@
   }
 
   function PB() {
+   var e = function(e, t) {
+     return '<fieldset class="spd-pbf"><legend>' + e + '</legend><p class="spd-hint">Choose any that apply.</p><div class="spd-idgrid">' + t.map(function(e) {
+      return '<label><input type="checkbox" data-spd-pbid="' + T(e) + '"><span>' + T(e) + "</span></label>"
+     }).join("") + '</div><input class="spd-field" data-spd-pbother="' + T(e) + '" placeholder="Another identity (optional)" style="margin-top:6px"></fieldset>'
+    };
    h("spd-m-pb-body").innerHTML = '<p>Writers from historically underrepresented communities, including BIPOC and LGBTQ+ writers, can apply for up to 2 free pitch times per Pitch Day. Approved writers book open pro-bono times first come, first served. Spots are limited.</p><label class="spd-ql" for="spd-pb-name">Name</label><input id="spd-pb-name" class="spd-field" autocomplete="name"><label class="spd-ql" for="spd-pb-email">Email</label><input id="spd-pb-email" class="spd-field" type="email" autocomplete="email" placeholder="you@example.com"><label class="spd-ql" for="spd-pb-ev">Pitch Day</label><select id="spd-pb-ev" class="spd-field">' + EV.map(function(e) {
     return '<option value="' + e.id + '"' + (e.id === l.date ? " selected" : "") + ">" + T(ER(e.id)) + ", " + D(e.days[0]).getUTCFullYear() + "</option>"
-   }).join("") + '</select><label class="spd-ql" for="spd-pb-book">Your book</label><input id="spd-pb-book" class="spd-field" placeholder="Title, genre and word count"><label class="spd-chk spd-chk-top"><input type="checkbox" id="spd-pb-id"><span>I\'m a writer from a historically underrepresented community, such as BIPOC or LGBTQ+.</span></label><label class="spd-chk spd-chk-top"><input type="checkbox" id="spd-pb-ai"><span>My pitch and pages are my own writing, not AI-generated.</span></label><button class="spd-btn spd-btn-gold" type="button" id="spd-pb-go" style="margin-top:16px">Send my application</button>', B("spd-m-pb"), h("spd-pb-go").onclick = function() {
-    var e = h("spd-pb-email").value.trim();
-    h("spd-pb-name").value.trim() && /^\S+@\S+\.\S+$/.test(e) && h("spd-pb-book").value.trim() ? h("spd-pb-id").checked && h("spd-pb-ai").checked ? h("spd-m-pb-body").innerHTML = '<p class="spd-serif" style="font-size:26px">Application received.</p><p>We\'ll email <b>' + T(e) + "</b> once applications are reviewed. If you're approved, you'll get a link to book open pro-bono times, first come, first served. (Demo: nothing was sent.)</p>" : A("Check both boxes to apply") : A("Add your name, email and book")
+   }).join("") + '</select><label class="spd-ql" for="spd-pb-book">Your book</label><input id="spd-pb-book" class="spd-field" placeholder="Title, genre and word count"><label class="spd-ql" for="spd-pb-blurb">Your blurb</label><textarea id="spd-pb-blurb" class="spd-field" rows="4" placeholder="A few sentences about your book, like the back cover. 150 words or fewer."></textarea><fieldset class="spd-pbf"><legend>Where is your manuscript?</legend><div class="spd-idgrid" style="grid-template-columns:1fr"><label><input type="radio" name="spd-pb-ms" value="complete"><span>My manuscript is complete</span></label><label><input type="radio" name="spd-pb-ms" value="beginner"><span>I\'m a true beginner: my manuscript isn\'t finished, or I\'ve never pitched before</span></label></div></fieldset>' + e("BIPOC: race and ethnicity", ["Black or African American", "African or Afro-Caribbean", "Afro-Latinx", "Latinx or Hispanic", "Indigenous, Native American or Alaska Native", "First Nations, Métis or Inuit", "East Asian", "South Asian", "Southeast Asian", "Middle Eastern or North African", "Native Hawaiian or Pacific Islander", "Multiracial"]) + e("LGBTQ+", ["Lesbian", "Gay", "Bisexual", "Pansexual", "Queer", "Transgender", "Nonbinary or genderqueer", "Two-Spirit", "Asexual or aromantic", "Intersex", "Questioning"]) + '<p class="spd-pbpriv">We use your identity answers only to review your application. They are never shared with agents.</p><label class="spd-chk spd-chk-top"><input type="checkbox" id="spd-pb-ai"><span>My pitch and pages are my own writing, not AI-generated.</span></label><button class="spd-btn spd-btn-gold" type="button" id="spd-pb-go" style="margin-top:16px">Send my application</button>', B("spd-m-pb"), h("spd-pb-go").onclick = function() {
+    var e = h("spd-m-pb-body"),
+     t = h("spd-pb-email").value.trim(),
+     a = e.querySelector('[name="spd-pb-ms"]:checked'),
+     s = e.querySelector("[data-spd-pbid]:checked") || [].some.call(e.querySelectorAll("[data-spd-pbother]"), function(e) {
+      return e.value.trim()
+     });
+    h("spd-pb-name").value.trim() && /^\S+@\S+\.\S+$/.test(t) && h("spd-pb-book").value.trim() ? h("spd-pb-blurb").value.trim().split(/\s+/).length < 15 ? A("Add a blurb of at least a few sentences") : a ? s ? h("spd-pb-ai").checked ? e.innerHTML = '<p class="spd-serif" style="font-size:26px">Application received.</p><p>We\'ll email <b>' + T(t) + "</b> once applications are reviewed. If you're approved, you'll get a link to book open pro-bono times, first come, first served. (Demo: nothing was sent.)</p>" : A("Check the box about your own writing") : A("Choose at least one identity, or describe your own") : A("Tell us where your manuscript is") : A("Add your name, email and book")
    }
   }
  }();
