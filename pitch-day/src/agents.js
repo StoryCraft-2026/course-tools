@@ -59,14 +59,14 @@
      ["How does the scorecard work?", "Your packet opens on your phone or computer from your Agent Portal. Under each writer's one-page is a Score this pitch button. Tap it when the call ends: the writer's name and time are already filled in, and it takes about a minute."],
      ["What are true beginners?", "Writers who want practice or a conversation instead of a full pitch. If you tick the box on the form, writers can filter for you, and those meetings are marked in your packet."],
      ["What are pro-bono times?", "If you opt in, you set aside 2 of your times each Pitch Day for writers from historically underrepresented communities, including BIPOC and LGBTQ+ writers. Those 2 times are unpaid. We review applications, and approved writers book open pro-bono times first come, first served."],
-     ["What is the First Pages Slam?", "A panel on Saturday at 9:00 AM Pacific. A moderator reads writers' first pages aloud to three agents, and each agent says where they'd stop reading and why. Opt in on the form if you'd like to sit on the panel."],
+     ["What is the First Pages Slam?", "A paid panel on Saturdays at 9:00 AM Pacific. A moderator reads writers' first pages aloud to three agents, and each agent says where they'd stop reading and why. Opt in on the form if you'd like to sit on the panel. We keep your pitch hours clear during it."],
      ["What do I get after Pitch Day?", "Your Pitch Day Report, the evening of the event. It's built from your scorecards and lists every writer you asked for a full, a partial or a query with pages, with their title, logline, genre, word count, contact email and your own note, plus the writers you passed on. Requested pages come in marked Pitch Day, so you can match them to the report."],
      ["What is the AI commitment?", "Every Pitch Day agent agrees not to put writers' query letters, pages, pitches or packets into any AI tool. We tell writers this on the booking page, and it's in your contract. Writers also confirm that the work they share is their own, not AI-generated."],
      ["What time zone are the times in?", "The form shows Pitch Day hours in your own time zone. Pick a different one from the menu if you'll be traveling. We store everything in Eastern and send your schedule in your time zone."],
      ["What if something changes?", "Tell us as soon as you can. We'll move or rebook your writers with care, and they get first pick of open times with another agent or credit toward the next Pitch Day."],
      ["Can a colleague join too?", "Yes. Mention them in the notes at the end of the form, or forward this page. Each agent signs up on their own form."],
      ["Do I need special software?", "Just Zoom. Pitch Day runs in StoryCraft's Zoom rooms, so you don't set up a meeting or share a link. Join from the link in your schedule 15 minutes before your first time, and a producer brings each writer to you. We handle bookings, reminders and calendar invites for writers."],
-     ["Is there a code of conduct?", "Yes. It covers writers, agents and our team, and you agree to it on the form. It also tells writers that your decisions are final and asks them not to email you to reconsider. Read it in full below."]
+     ["Is there a code of conduct?", "Yes. It covers writers, agents and our team, and you agree to it on the form. It also tells writers that your decisions are final and asks them not to email you to reconsider. You can read it in full under the agreements on the sign-up form."]
     ],
     u = Intl.DateTimeFormat().resolvedOptions().timeZone || "America/New_York",
     l = [
@@ -103,7 +103,8 @@
       p: 12,
       f: 0,
       q: 0,
-      w: 0
+      w: 0,
+      s: 0
      },
      done: {}
     },
@@ -124,7 +125,7 @@
     e.href = "https://calendly.com/d/cs9n-2zd-tjf/half-hour-discovery-call"
    }), e.querySelectorAll("[data-apd-pin]").forEach(function(e) {
     e.src = "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148720201/images/f7783de-e8c0-abb3-25c-445823b37d0d_certified_organic_storyteller.png"
-   }), w(t.pitch) && w(t.feedback) && w(t.qletter) && w(t.pages) && (o("apd-phnote").style.display = "none"), o("apd-adds").innerHTML = ["A hook I can repeat in one line", "Clear stakes up front", "Recent comps (last 5 years)", "Knowing how it ends", "Voice and personality", "A conversation, not a script", "Why you are the one to write it", "Time left for my questions"].map(function(e) {
+   }), w(t.pitch) && w(t.feedback) && w(t.qletter) && w(t.pages) && w(t.panel) && (o("apd-phnote").style.display = "none"), o("apd-adds").innerHTML = ["A hook I can repeat in one line", "Clear stakes up front", "Recent comps (last 5 years)", "Knowing how it ends", "Voice and personality", "A conversation, not a script", "Why you are the one to write it", "Time left for my questions"].map(function(e) {
     return '<button type="button" class="apd-add" data-apd-like="' + A(e) + '">+ ' + A(e) + "</button>"
    }).join("");
    var g, y = !1,
@@ -203,7 +204,7 @@
        var D = a.getAttribute("data-apd-est").split("|"),
         q = p.est,
         P = +D[1];
-       return "p" === D[0] ? q.p = Math.max(1, Math.min(30, q.p + P)) : "f" === D[0] ? q.f = Math.max(0, Math.min(q.p, q.f + P)) : q[D[0]] = Math.max(0, Math.min(30, q[D[0]] + P)), q.f > q.p && (q.f = q.p), void Z()
+       return "p" === D[0] ? q.p = Math.max(1, Math.min(30, q.p + P)) : "s" === D[0] ? q.s = Math.max(0, Math.min(1, q.s + P)) : "f" === D[0] ? q.f = Math.max(0, Math.min(q.p, q.f + P)) : q[D[0]] = Math.max(0, Math.min(30, q[D[0]] + P)), q.f > q.p && (q.f = q.p), void Z()
       }
       de(), oe()
      }
@@ -316,6 +317,66 @@
       }
      })
     }
+   }), e.querySelectorAll("[data-apd-portal]").forEach(function(e) {
+    e.href = "/login"
+   }), o("apd-dates").innerHTML = n.filter(function(e, t) {
+    return t % 2 == 0
+   }).map(function(e, t) {
+    var a = n[2 * t + 1],
+     r = q(e.id);
+    return '<button type="button" class="apd-dt" data-apd-jump="' + e.id + '" aria-label="' + A(M(e.id) + (a ? " and " + M(a.id) : "")) + '"><span>' + E(r, "UTC", {
+     month: "short"
+    }) + "</span><b>" + E(r, "UTC", {
+     day: "numeric"
+    }) + (a ? "&ndash;" + E(q(a.id), "UTC", {
+     day: "numeric"
+    }) : "") + "</b><small>" + E(r, "UTC", {
+     weekday: "short"
+    }) + (a ? " + " + E(q(a.id), "UTC", {
+     weekday: "short"
+    }) : "") + "</small></button>"
+   }).join(""), e.addEventListener("click", function(t) {
+    var a = t.target,
+     r = o("apd-m-sc");
+    if (a === r) return void ge();
+    if (a = a.closest("[data-apd-open],[data-apd-close],[data-apd-tab],[data-apd-jump],[data-apd-o],[data-apd-scsend]")) {
+     if (a.hasAttribute("data-apd-jump")) {
+      t.preventDefault(), p.cur = a.getAttribute("data-apd-jump"), J(), oe();
+      var i = e.querySelector('[data-apd-sec="3"]');
+      return void(i && i.scrollIntoView({
+       behavior: "smooth",
+       block: "start"
+      }))
+     }
+     if (a.hasAttribute("data-apd-open")) return be(a.getAttribute("data-apd-open")), r._f = a, r.classList.add("apd-open"), document.body.style.overflow = "hidden", void setTimeout(function() {
+      r.querySelector(".apd-x").focus()
+     }, 30);
+     if (a.hasAttribute("data-apd-close")) return void ge();
+     if (a.hasAttribute("data-apd-tab")) return void be(a.getAttribute("data-apd-tab"));
+     if (a.hasAttribute("data-apd-o")) {
+      var s = a.parentNode,
+       c = s.hasAttribute("data-apd-multi"),
+       d = s.querySelectorAll(".apd-o");
+      return void(c && "Fine" !== a.textContent ? (d[0].setAttribute("aria-pressed", "false"), a.setAttribute("aria-pressed", String("true" !== a.getAttribute("aria-pressed")))) : (d.forEach(function(e) {
+       e.setAttribute("aria-pressed", "false")
+      }), a.setAttribute("aria-pressed", "true")))
+     }
+     var u = [].every.call(r.querySelectorAll(".apd-opts"), function(e) {
+      return e.querySelector('[aria-pressed="true"]')
+     });
+     o("apd-scmsg").innerHTML = u ? '<div class="apd-ok">Sent. (This is a demo, so nothing was sent.) Your answers join the writer\'s other agents in their Pitch Report. <button type="button" class="apd-linkbtn" style="margin:6px 0 0;display:block" data-apd-tab="writer">See what the writer gets &rarr;</button></div>' : "<div>Tap one answer in each row to finish.</div>"
+    }
+   }), document.addEventListener("keydown", function(e) {
+    if (o("apd-m-sc").classList.contains("apd-open"))
+     if ("Escape" === e.key) ge();
+     else if ("Tab" === e.key) {
+      var t = [].filter.call(o("apd-m-sc").querySelectorAll("button,input"), function(e) {
+        return e.offsetParent
+       }),
+       a = t[0],
+       n = t[t.length - 1];
+      e.shiftKey && document.activeElement === a ? (e.preventDefault(), n.focus()) : e.shiftKey || document.activeElement !== n || (e.preventDefault(), a.focus())
+     }
    }), o("apd-faq").innerHTML = d.map(function(e) {
     return "<details><summary>" + A(e[0]) + "</summary><p>" + A(e[1]) + "</p></details>"
    }).join("");
@@ -372,6 +433,21 @@
 
   function w(e) {
    return "number" == typeof e && isFinite(e)
+  }
+
+  function be(t) {
+   e.querySelectorAll(".apd-tab").forEach(function(e) {
+    e.setAttribute("aria-selected", String(e.getAttribute("data-apd-tab") === t))
+   }), e.querySelectorAll(".apd-pane").forEach(function(e) {
+    e.hidden = e.id !== "apd-p-" + t
+   });
+   var a = o("apd-m-sc");
+   a.scrollTop = 0
+  }
+
+  function ge() {
+   var e = o("apd-m-sc");
+   e.classList.remove("apd-open"), document.body.style.overflow = "", e._f && e._f.focus && e._f.focus()
   }
 
   function k(e) {
@@ -554,11 +630,11 @@
 
   function Z() {
    var e = p.est;
-   o("apd-ep").textContent = e.p, o("apd-ef").textContent = e.f, o("apd-eq").textContent = e.q, o("apd-ew").textContent = e.w;
+   o("apd-ep").textContent = e.p, o("apd-ef").textContent = e.f, o("apd-eq").textContent = e.q, o("apd-ew").textContent = e.w, o("apd-es").textContent = e.s;
    var a = [e.p + " pitch" + (1 === e.p ? "" : "es") + " × " + k(t.pitch)];
-   e.f && a.push(e.f + " pre-read × " + k(t.feedback)), e.q && a.push(e.q + " written query × " + k(t.qletter)), e.w && a.push(e.w + " written pages × " + k(t.pages));
-   var n = w(t.pitch) && (!e.f || w(t.feedback)) && (!e.q || w(t.qletter)) && (!e.w || w(t.pages)) && !0;
-   o("apd-etotal").textContent = n ? k(e.p * t.pitch + (e.f ? e.f * t.feedback : 0) + (e.q ? e.q * t.qletter : 0) + (e.w ? e.w * t.pages : 0) + 0) : "$XYZ", o("apd-ebreak").textContent = a.join(" + ")
+   e.f && a.push(e.f + " pre-read × " + k(t.feedback)), e.q && a.push(e.q + " written query × " + k(t.qletter)), e.w && a.push(e.w + " written pages × " + k(t.pages)), e.s && a.push("Slam panel " + k(t.panel));
+   var n = w(t.pitch) && (!e.f || w(t.feedback)) && (!e.q || w(t.qletter)) && (!e.w || w(t.pages)) && (!e.s || w(t.panel)) && !0;
+   o("apd-etotal").textContent = n ? k(e.p * t.pitch + (e.f ? e.f * t.feedback : 0) + (e.q ? e.q * t.qletter : 0) + (e.w ? e.w * t.pages : 0) + (e.s ? t.panel : 0)) : "$XYZ", o("apd-ebreak").textContent = a.join(" + ")
   }
 
   function R() {
