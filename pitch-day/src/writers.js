@@ -131,7 +131,8 @@
     }],
     n = 19,
     SL = 24,
-    PP = 39,
+    PP = 49,
+    PM = 44,
     GR = "https://zoom.us/j/STORYCRAFT-PITCH-DAY",
     EV = [{
      id: "2027-05",
@@ -438,9 +439,9 @@
       }, t.appendChild(s)
      })
     }(), t = h("spd-faq"), [
-     ["Do I need to buy a conference ticket?", "No. You pay $39 per pitch time and add only the prep you want. There is no registration fee."],
+     ["Do I need to buy a conference ticket?", "No. You pay $49 per pitch time ($44 for Academy members) and add only the prep you want. There is no registration fee."],
      ["How does a pitch time work?", "Each time is 15 minutes. Join the StoryCraft Zoom at your start time: a producer checks your camera and mic in the green room, then moves you into your agent's room for 10 minutes. Keep your pitch to 5 minutes or less and use the rest for the agent's questions and feedback."],
-     ["Can I book more than one time with the same agent?", "Yes, if the times are back-to-back. Book two or more in a row to pitch a second book, or to talk through questions beyond the book you're pitching. Each time is $39, and you still keep each pitch to 5 minutes or less."],
+     ["Can I book more than one time with the same agent?", "Yes, if the times are back-to-back. Book two or more in a row to pitch a second book, or to talk through questions beyond the book you're pitching. Each time is $49 ($44 for members), and you still keep each pitch to 5 minutes or less."],
      ["I'm brand new to this. Is Pitch Day for me?", "Yes. If you've never pitched an agent, or your manuscript isn't finished yet, you're a true beginner. Turn on \"Only show agents open to true beginners\" above the agent board. When you book one of those agents, tick \"I'm a true beginner\" in your cart, and the agent will treat your time as practice or a conversation instead of a full pitch."],
      ["What should I have ready?", "A finished or nearly finished manuscript. After you book, sign in to My Pitch Day and add your book details: title, genre, word count, logline, two comps and a short bio. Every agent you meet sees them before your time, so they come in prepared. If you choose a Live Pre-Read session, you upload your query letter and first 5 pages there too."],
      ["What is My Pitch Day?", "Your Pitch Day page inside your StoryCraft account. Sign in on any device to see your upcoming times, change your schedule, update your book details and watch the welcome video, which walks you through the day and how to pitch well."],
@@ -483,7 +484,7 @@
   }
 
   function b(e) {
-   return '<div class="spd-memnote"><p><b>Member prices apply when you sign in with your Academy account.</b>' + (e ? "" : " Not a member yet? The Academy is $33 a month and saves you " + y(s[0].price - s[0].member) + " on the course and " + y(s[1].price - s[1].member) + " on a practice session.") + '</p><a class="spd-btn spd-btn-gold spd-btn-sm" href="' + d + '">Sign in</a><a class="spd-btn spd-btn-line spd-btn-sm" href="' + r + '" target="_blank" rel="noopener">Join the Academy · $33/month</a></div>'
+   return '<div class="spd-memnote"><p><b>Member prices apply when you sign in with your Academy account.</b>' + (e ? "" : " Not a member yet? The Academy is $33 a month and saves you " + y(PP - PM) + " on every pitch, " + y(s[0].price - s[0].member) + " on the course and " + y(s[1].price - s[1].member) + " on a practice session.") + '</p><a class="spd-btn spd-btn-gold spd-btn-sm" href="' + d + '">Sign in</a><a class="spd-btn spd-btn-line spd-btn-sm" href="' + r + '" target="_blank" rel="noopener">Join the Academy · $33/month</a></div>'
   }
 
   function y(e) {
@@ -504,6 +505,10 @@
     t.push(new Date(r)), r += 9e5
    }
    return t
+  }
+
+  function PX() {
+   return l.member ? PM : PP
   }
 
   function SV() {
@@ -723,7 +728,7 @@
      k: "p",
      p: t,
      a: s,
-     amt: PP
+     amt: PX()
     }), t.fb && e.push({
      k: "fb",
      p: t,
@@ -760,12 +765,12 @@
      var e = h("spd-dbody"),
       t = "";
      if (CN()) {
-      l.pitches.length && (t += '<div class="spd-dsub">Pitch times · ' + y(PP) + " each</div>", BL().forEach(function(b) {
+      l.pitches.length && (t += '<div class="spd-dsub">Pitch times · ' + y(PX()) + " each" + (l.member ? " (member price)" : "") + "</div>", BL().forEach(function(b) {
        var s = b.i0,
         e = l.pitches[s],
         i = N(e.agent),
         o = new Date(e.time);
-       t += '<div class="spd-ditem"><div class="spd-ditem-top"><span>' + T(i.name) + "<small>" + R(o) + " · " + 15 * b.n + " min" + (b.n > 1 ? " · " + b.n + " back-to-back times" : "") + " · " + T(i.agency) + "</small></span><span>" + y(PP * b.n) + (e.fb ? " + " + y(n) : "") + "</span></div>" + (b.n > 1 ? '<div class="spd-use"><label for="spd-use-' + s + '">What\'s the extra time for?</label><select class="spd-field" id="spd-use-' + s + '" data-spd-use="' + s + '"><option value="">Choose one</option><option value="book2"' + ("book2" === e.use ? " selected" : "") + '>Pitching a second book</option><option value="talk"' + ("talk" === e.use ? " selected" : "") + ">Questions beyond the book I'm pitching</option></select></div>" : "") + (i.beginner ? '<label class="spd-chk spd-chk-top"><input type="checkbox" data-spd-begp="' + s + '" ' + (e.beg ? "checked" : "") + "><span>I'm a true beginner: I'd like practice or a conversation instead of a full pitch</span></label>" : "") + '<label class="spd-chk spd-chk-top"><input type="checkbox" data-spd-fb="' + s + '" ' + (e.fb ? "checked" : "") + "><span>Make this a Live Pre-Read session (+" + y(n) + '): send your query letter and first 5 pages ahead and use your time with the agent for feedback and a request decision</span></label><button class="spd-rm" type="button" data-spd-rmb="' + e.agent + "|" + b.start + "|" + b.end + '">Remove</button></div>'
+       t += '<div class="spd-ditem"><div class="spd-ditem-top"><span>' + T(i.name) + "<small>" + R(o) + " · " + 15 * b.n + " min" + (b.n > 1 ? " · " + b.n + " back-to-back times" : "") + " · " + T(i.agency) + "</small></span><span>" + y(PX() * b.n) + (e.fb ? " + " + y(n) : "") + "</span></div>" + (b.n > 1 ? '<div class="spd-use"><label for="spd-use-' + s + '">What\'s the extra time for?</label><select class="spd-field" id="spd-use-' + s + '" data-spd-use="' + s + '"><option value="">Choose one</option><option value="book2"' + ("book2" === e.use ? " selected" : "") + '>Pitching a second book</option><option value="talk"' + ("talk" === e.use ? " selected" : "") + ">Questions beyond the book I'm pitching</option></select></div>" : "") + (i.beginner ? '<label class="spd-chk spd-chk-top"><input type="checkbox" data-spd-begp="' + s + '" ' + (e.beg ? "checked" : "") + "><span>I'm a true beginner: I'd like practice or a conversation instead of a full pitch</span></label>" : "") + '<label class="spd-chk spd-chk-top"><input type="checkbox" data-spd-fb="' + s + '" ' + (e.fb ? "checked" : "") + "><span>Make this a Live Pre-Read session (+" + y(n) + '): send your query letter and first 5 pages ahead and use your time with the agent for feedback and a request decision</span></label><button class="spd-rm" type="button" data-spd-rmb="' + e.agent + "|" + b.start + "|" + b.end + '">Remove</button></div>'
       }));
       var i = s.filter(function(e) {
        return l.addons[e.id]
@@ -783,7 +788,7 @@
       });
       l.pitches.length && o.length && (t += '<div class="spd-dsub">Add before you check out</div>', o.forEach(function(e) {
        t += '<div class="spd-ditem"><div class="spd-ditem-top"><span>' + T(e.name) + "<small>" + T(e.desc) + "</small></span><span>" + (O(e) ? y(O(e)) : "Included") + "</span></div>" + ("panel" === e.id ? '<a class="spd-rm" style="color:var(--teal)!important" href="#spd-addons" data-spd-close-drawer>Choose a session</a>' : '<button class="spd-rm" style="color:var(--teal)!important" type="button" data-spd-addon="' + e.id + '">+ Add</button>') + "</div>"
-      })), t += '<label class="spd-chk" style="margin-top:14px"><input type="checkbox" id="spd-member-cart" ' + (l.member ? "checked" : "") + "> Show Academy member prices</label>" + (l.member ? b(!0) : '<p style="font-size:13px;color:var(--muted);margin-top:8px">Not a member? <a href="' + r + '" target="_blank" rel="noopener">Join the Academy</a> for $33/month and save on every add-on.</p>')
+      })), t += '<label class="spd-chk" style="margin-top:14px"><input type="checkbox" id="spd-member-cart" ' + (l.member ? "checked" : "") + "> Show Academy member prices</label>" + (l.member ? b(!0) : '<p style="font-size:13px;color:var(--muted);margin-top:8px">Not a member? <a href="' + r + '" target="_blank" rel="noopener">Join the Academy</a> for $33/month and save on every pitch, the course and practice sessions.</p>')
      } else t = '<div class="spd-empty"><p class="spd-serif" style="font-size:24px">Your cart is empty</p><p>Tap an open time on any agent card to add a pitch.</p><a class="spd-btn spd-btn-line" href="#spd-agents" data-spd-close-drawer>Browse agents</a></div>';
      e.innerHTML = t;
      var d = h("spd-member-cart");
