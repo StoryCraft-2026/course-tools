@@ -49,3 +49,16 @@ Near the top of `course.js`, set the feature to `false` in `CONFIG`, for example
 - Runs in web browsers only. The Kajabi mobile app does not run custom code.
 - Quiz drafts are saved per browser, so they don't follow someone to another device.
 - Kajabi stores short-answer quiz responses on one line, so line breaks are saved as spaces.
+
+## Pitch Day pages
+
+The two Pitch Day landing pages load their page text and booking code from this repo, so edits don't have to be pasted into Kajabi.
+
+| Page | Kajabi landing page | Script |
+|---|---|---|
+| Writer sales page `/pitch-day` | 2152414898 (theme 2168329814) | `https://storycraft-2026.github.io/course-tools/pitch-day/writers.js` |
+| Agent sign-up `/pitch-day-agents` | 2152415226 (theme 2168331226) | `https://storycraft-2026.github.io/course-tools/pitch-day/agents.js` |
+
+In Kajabi, each page keeps its stylesheet code block, plus an empty mount (`<div id="spd-mount"></div>` or `<div id="apd-mount"></div>`) and a `<script src>` tag pointing at the script above. The agent page also keeps its native Kajabi form block, which the script fills in and submits.
+
+To change a page: edit `pitch-day/src/` (`*.html` is the page markup, `*.js` the behaviour), run `node pitch-day/build.js` (needs `npm i -g terser`), test, and push. Live pages pick up the change within about 10 minutes.
