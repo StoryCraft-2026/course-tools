@@ -204,6 +204,7 @@
      pitches: [],
      addons: {},
      slam: [],
+     pif: !1,
      beg: !1,
      date: "2027-05",
      member: !1,
@@ -373,7 +374,7 @@
      else e.target.classList.contains("spd-modal") && G()
     }), e.addEventListener("change", function(e) {
      var g2 = e.target;
-     g2.hasAttribute("data-spd-fb") && (l.pitches[+g2.getAttribute("data-spd-fb")].fb = g2.checked, j()), g2.hasAttribute("data-spd-begp") && (l.pitches[+g2.getAttribute("data-spd-begp")].beg = g2.checked, j()), g2.hasAttribute("data-spd-use") && (l.pitches[+g2.getAttribute("data-spd-use")].use = g2.value), "spd-beg-toggle" === g2.id && (l.beg = g2.checked, P())
+     g2.hasAttribute("data-spd-fb") && (l.pitches[+g2.getAttribute("data-spd-fb")].fb = g2.checked, j()), g2.hasAttribute("data-spd-begp") && (l.pitches[+g2.getAttribute("data-spd-begp")].beg = g2.checked, j()), g2.hasAttribute("data-spd-use") && (l.pitches[+g2.getAttribute("data-spd-use")].use = g2.value), "spd-beg-toggle" === g2.id && (l.beg = g2.checked, P()), "spd-pif" === g2.id && (l.pif = g2.checked, j())
     }), h("spd-cartbtn").onclick = function() {
      h("spd-drawer").classList.add("spd-open"), h("spd-scrim").classList.add("spd-open"), setTimeout(function() {
       var e = h("spd-drawer").querySelector(".spd-x");
@@ -384,7 +385,7 @@
       Y(), c = Date.now() + 12e5;
       var e = "";
       l.pitches.length && (e += "<p>We're holding " + (1 === l.pitches.length ? "this time" : "these " + l.pitches.length + " times") + ' for you while you pay.</p><div class="spd-timer" id="spd-timer">20:00</div><p style="text-align:center;font-size:13px;color:var(--muted)">Held under your email until the timer runs out</p>'), l.member && (e += '<div class="spd-memnote" style="margin:0 0 14px"><p>Member prices in your total apply once you sign in with your Academy account. Not a member? Join first and your member prices carry over.</p><a class="spd-btn spd-btn-gold spd-btn-sm" href="' + d + '">Sign in</a><a class="spd-btn spd-btn-line spd-btn-sm" href="' + r + '" target="_blank" rel="noopener">Join · $33/month</a></div>'), e += '<label for="spd-co-email" style="font-weight:700;font-size:14px">Email for your StoryCraft account</label><input id="spd-co-email" class="spd-field" type="email" placeholder="you@example.com" autocomplete="email"><p class="spd-co-note">Your bookings live in your StoryCraft account. Checkout creates one if you don\'t have one yet.</p>', z().forEach(function(t) {
-       var a = "p" === t.k ? t.a.name + " · " + R(new Date(t.p.time)) : "fb" === t.k ? "Live Pre-Read upgrade · " + t.a.name : "slam" === t.k ? "First Pages Slam page · " + R(SD(t.ev)) : "panel" === t.ad.id ? t.ad.name + " · " + E(S(l.addons.panel)) : t.ad.name;
+       var a = "p" === t.k ? t.a.name + " · " + R(new Date(t.p.time)) : "fb" === t.k ? "Live Pre-Read upgrade · " + t.a.name : "slam" === t.k ? "First Pages Slam page · " + R(SD(t.ev)) : "pif" === t.k ? "Pay it forward: scholarship pitches" : "panel" === t.ad.id ? t.ad.name + " · " + E(S(l.addons.panel)) : t.ad.name;
        e += '<div class="spd-mini-row"><span>' + T(a) + "</span><span>" + (t.amt ? y(t.amt) : "Included") + "</span></div>"
       }), e += '<div class="spd-total" style="margin-top:12px"><span>Total</span><span>' + y(U()) + "</span></div>", e += '<label class="spd-chk spd-chk-top" style="margin-top:16px"><input type="checkbox" id="spd-co-ai"><span><b>My pitch and pages are my own writing.</b> I won\'t share AI-generated work with Pitch Day agents.</span></label><label class="spd-chk spd-chk-top"><input type="checkbox" id="spd-co-coc"><span>I agree to the Pitch Day Code of Conduct.</span></label><details class="spd-cocin"><summary>Read the Code of Conduct</summary>' + COC() + "</details>", e += '<button class="spd-btn spd-btn-gold" type="button" id="spd-pay" style="width:100%;justify-content:center">Continue to secure checkout</button>', e += '<div class="spd-note">Demo: on the live page this button opens the Kajabi checkout. Here it shows the confirmation a writer receives after paying.</div>', h("spd-m-checkout-title").textContent = l.pitches.length ? "Your times are on hold" : "Review your order", h("spd-m-checkout-body").innerHTML = e, B("spd-m-checkout"), clearInterval(p), p = setInterval(function() {
        var e = h("spd-timer");
@@ -412,14 +413,14 @@
          return '<div class="spd-mini-row"><span>' + T(e.name) + "</span><span>" + ("practice" === e.id || "bundle" === e.id ? "Booking link sent" : "workshop" === e.id ? "Access in your library" : "panel" === e.id ? T(E(S(l.addons.panel))) + " · calendar invite sent" : "Upload link sent") + "</span></div>"
         }).join("")), l.slam.length && (t += '<div class="spd-dsub">First Pages Slam</div>' + l.slam.map(function(v) {
          return '<div class="spd-mini-row"><span>Your first page · ' + T(R(SD(v))) + "</span><span>Upload in My Pitch Day</span></div>"
-        }).join("")), t += '<div class="spd-note" style="background:#e8f1f0">You\'re in the Writers Collective. Watch your email for your invite to the Pitch Day forums and group pitching hours.</div><div class="spd-note">Next: sign in to <b>My Pitch Day</b> with your StoryCraft account. Add your book details for your agents (genre, word count, logline and a short bio)' + (l.pitches.some(function(e) {
+        }).join("")), l.pif && (t += '<div class="spd-dsub">Pay it forward</div><div class="spd-mini-row"><span>Thank you. Your $5 helps pay for a scholarship pitch.</span><span>$5</span></div>'), t += '<div class="spd-note" style="background:#e8f1f0">You\'re in the Writers Collective. Watch your email for your invite to the Pitch Day forums and group pitching hours.</div><div class="spd-note">Next: sign in to <b>My Pitch Day</b> with your StoryCraft account. Add your book details for your agents (genre, word count, logline and a short bio)' + (l.pitches.some(function(e) {
          return e.fb
         }) ? ", upload your query package for your Live Pre-Read sessions" : "") + " and watch the welcome video before the event. Need to change something? Change times or agents there until your schedule locks 7 days before Pitch Day.</div><a class=\"spd-btn spd-btn-gold spd-btn-sm\" href=\"" + d + "\">Sign in to My Pitch Day</a>", h("spd-m-checkout-title").textContent = "Confirmation (demo)", h("spd-m-checkout-body").innerHTML = t, l.pitches.forEach(function(e) {
          var t = a.filter(function(t) {
           return t.id === e.agent
          })[0];
          t.booked.indexOf(e.idx) < 0 && t.booked.push(e.idx)
-        }), l.pitches = [], l.addons = {}, l.slam = [], j()
+        }), l.pitches = [], l.addons = {}, l.slam = [], l.pif = !1, j()
        }(e) : A("Check both boxes to continue") : A("Enter a valid email")
       }
      }
@@ -444,7 +445,7 @@
      ["What should I have ready?", "A finished or nearly finished manuscript. After you book, sign in to My Pitch Day and add your book details: title, genre, word count, logline, two comps and a short bio. Every agent you meet sees them before your time, so they come in prepared. If you choose a Live Pre-Read session, you upload your query letter and first 5 pages there too."],
      ["What is My Pitch Day?", "Your Pitch Day page inside your StoryCraft account. Sign in on any device to see your upcoming times, change your schedule, update your book details and watch the welcome video, which walks you through the day and how to pitch well."],
      ["What is the First Pages Slam?", "A live panel on Saturdays at 9:00 AM Pacific. A moderator reads submitted first pages aloud to three agents, and each agent says where they'd stop reading and why. Watching is free with any Pitch Day booking. Submitting your first page is $24, and only 10 pages are read at each Slam. No pitches run from 8:45 to 10:15 AM Pacific on Saturdays, so everyone can watch."],
-     ["Do you offer free pitch times?", "Yes. Some agents set aside two pro-bono pitch times each Pitch Day for writers from historically underrepresented communities, for example BIPOC, LGBTQ+ or disabled writers. Apply on this page for up to 2 free times. Approved writers book open pro-bono times first come, first served."],
+     ["Do you offer free pitch times?", "Yes. Every agent takes up to 2 scholarship pitches each Pitch Day, free for writers from underrepresented communities, for example BIPOC, LGBTQ+ or disabled writers. Apply on this page for up to 2 free times and tell us which agents you'd like to pitch. Telling us how you identify is optional and never shared with agents. Approved writers book open scholarship times first come, first served. Scholarships are paid for by StoryCraft and by writers who add $5 to pay it forward at checkout."],
      ["How does the Pitch Report work?", "After each meeting, the agent completes a short scorecard: hook, stakes, comps, genre and word count, one thing that works, one thing to change, and their next step. You get one combined report within 48 hours."],
      ["Can I get feedback instead of pitching?", "Yes. Hate having to perform on the spot? Add a Live Pre-Read session to any pitch in your cart (+$19). Send your query letter and first 5 pages ahead, and use your time with the agent for feedback and a request decision. You still get a Pitch Report."],
      ["Can I pitch on more than one weekend?", "Yes. Pitch Day runs four weekends in 2027, each on a Friday and Saturday: May 14-15, June 11-12, October 15-16 and November 12-13. Switch weekends at the top of the agent board. Each one has its own agents and times, and everything goes in one cart."],
@@ -741,6 +742,9 @@
      ev: v,
      amt: SL
     })
+   }), l.pif && CN() && e.push({
+    k: "pif",
+    amt: 5
    }), e
   }
 
@@ -773,6 +777,7 @@
       l.slam.length && (t += '<div class="spd-dsub">First Pages Slam · ' + y(SL) + " per page</div>", l.slam.forEach(function(v) {
        t += '<div class="spd-ditem"><div class="spd-ditem-top"><span>Your first page, read to 3 agents<small>' + T(R(SD(v))) + '</small></span><span>' + y(SL) + '</span></div><button class="spd-rm" type="button" data-spd-rms="' + v + '">Remove</button></div>'
       }));
+      t += '<label class="spd-chk spd-chk-top" style="margin-top:12px"><input type="checkbox" id="spd-pif" ' + (l.pif ? "checked" : "") + "><span><b>Pay it forward (+$5).</b> Help pay for a free scholarship pitch for an underrepresented writer. Anything above the cost of each Pitch Day's scholarships goes into a fund for extra scholarships.</span></label>";
       var o = s.filter(function(e) {
        return !(e.info || l.addons[e.id] || "bundle" !== e.id && l.addons.bundle && ("workshop" === e.id || "practice" === e.id) || l.addons.workshop && l.addons.practice && "bundle" === e.id)
       });
@@ -953,10 +958,8 @@
    }).join("") + '<p class="spd-tznote">Shown in your time zone (' + T(u.replace(/_/g, " ")) + "). The Slam starts at 9:00 AM Pacific.</p>");
    var t = h("spd-pbcount");
    if (t) {
-    var a = q(l.date).filter(function(e) {
-     return e.probono
-    }).length;
-    t.textContent = a ? a + (1 === a ? " agent is" : " agents are") + " offering pro-bono times for " + ER(l.date) + "." : "Pro-bono times for " + ER(l.date) + " open as agents confirm."
+    var a = q(l.date).length;
+    t.textContent = a ? 2 * a + " scholarship pitches for " + ER(l.date) + ": up to 2 with each of " + a + (1 === a ? " agent." : " agents.") : "Scholarship pitches for " + ER(l.date) + " open as agents confirm."
    }
   }
 
@@ -966,14 +969,21 @@
       return '<label><input type="checkbox" data-spd-pbid="' + T(e) + '"><span>' + T(e) + "</span></label>"
      }).join("") + '</div><input class="spd-field" data-spd-pbother="' + T(e) + '" placeholder="Another identity (optional)" style="margin-top:6px"></fieldset>'
     };
-   h("spd-m-pb-body").innerHTML = '<p>Writers from historically underrepresented communities, for example BIPOC, LGBTQ+ or disabled writers, can apply for up to 2 free pitch times per Pitch Day. Approved writers book open pro-bono times first come, first served. Spots are limited. Telling us how you identify is optional and never shared with agents.</p><label class="spd-ql" for="spd-pb-name">Name</label><input id="spd-pb-name" class="spd-field" autocomplete="name"><label class="spd-ql" for="spd-pb-email">Email</label><input id="spd-pb-email" class="spd-field" type="email" autocomplete="email" placeholder="you@example.com"><label class="spd-ql" for="spd-pb-ev">Pitch Day</label><select id="spd-pb-ev" class="spd-field">' + EV.map(function(e) {
+   h("spd-m-pb-body").innerHTML = '<p>Writers from historically underrepresented communities, for example BIPOC, LGBTQ+ or disabled writers, can apply for up to 2 free scholarship pitches per Pitch Day. Approved writers book open scholarship times first come, first served. Spots are limited. Telling us how you identify is optional and never shared with agents.</p><label class="spd-ql" for="spd-pb-name">Name</label><input id="spd-pb-name" class="spd-field" autocomplete="name"><label class="spd-ql" for="spd-pb-email">Email</label><input id="spd-pb-email" class="spd-field" type="email" autocomplete="email" placeholder="you@example.com"><label class="spd-ql" for="spd-pb-ev">Pitch Day</label><select id="spd-pb-ev" class="spd-field">' + EV.map(function(e) {
     return '<option value="' + e.id + '"' + (e.id === l.date ? " selected" : "") + ">" + T(ER(e.id)) + ", " + D(e.days[0]).getUTCFullYear() + "</option>"
-   }).join("") + '</select><label class="spd-ql" for="spd-pb-book">Your book</label><input id="spd-pb-book" class="spd-field" placeholder="Title, genre and word count"><label class="spd-ql" for="spd-pb-blurb">Your blurb</label><textarea id="spd-pb-blurb" class="spd-field" rows="4" placeholder="A few sentences about your book, like the back cover. 150 words or fewer."></textarea><fieldset class="spd-pbf"><legend>Where is your manuscript?</legend><div class="spd-idgrid" style="grid-template-columns:1fr"><label><input type="radio" name="spd-pb-ms" value="complete"><span>My manuscript is complete</span></label><label><input type="radio" name="spd-pb-ms" value="beginner"><span>I\'m a true beginner: my manuscript isn\'t finished, or I\'ve never pitched before</span></label></div></fieldset><label class="spd-ql" for="spd-pb-persp" style="margin-top:16px">What perspective does your book bring that publishing hasn\'t heard enough of?</label><textarea id="spd-pb-persp" class="spd-field" rows="4" placeholder="A few sentences. This is what we review applications on."></textarea><div class="spd-pbopt"><b>Optional: how you identify</b>You don\'t have to answer anything below. Skipping it won\'t count against your application. Whatever you share stays with the StoryCraft team and is <b style="display:inline">never shared with agents</b>.</div>' + e("BIPOC: race and ethnicity", ["Black or African American", "African or Afro-Caribbean", "Afro-Latinx", "Latinx or Hispanic", "Indigenous, Native American or Alaska Native", "First Nations, Métis or Inuit", "East Asian", "South Asian", "Southeast Asian", "Middle Eastern or North African", "Native Hawaiian or Pacific Islander", "Multiracial"]) + e("LGBTQ+", ["Lesbian", "Gay", "Bisexual", "Pansexual", "Queer", "Transgender", "Nonbinary or genderqueer", "Two-Spirit", "Asexual or aromantic", "Intersex", "Questioning"]) + e("Disability", ["Disabled", "Chronically ill", "Neurodivergent", "Deaf or hard of hearing", "Blind or low vision"]) + '<p class="spd-pbpriv">We use your answers only to review your application.</p><label class="spd-chk spd-chk-top"><input type="checkbox" id="spd-pb-ai"><span>My pitch and pages are my own writing, not AI-generated.</span></label><button class="spd-btn spd-btn-gold" type="button" id="spd-pb-go" style="margin-top:16px">Send my application</button>', B("spd-m-pb"), h("spd-pb-go").onclick = function() {
+   }).join("") + '</select><fieldset class="spd-pbf"><legend>Which agents would you like to pitch?</legend><p class="spd-hint">Choose any that fit your book. You can have up to 2 scholarship pitches.</p><div id="spd-pb-ags"></div></fieldset><label class="spd-ql" for="spd-pb-book">Your book</label><input id="spd-pb-book" class="spd-field" placeholder="Title, genre and word count"><label class="spd-ql" for="spd-pb-blurb">Your blurb</label><textarea id="spd-pb-blurb" class="spd-field" rows="4" placeholder="A few sentences about your book, like the back cover. 150 words or fewer."></textarea><fieldset class="spd-pbf"><legend>Where is your manuscript?</legend><div class="spd-idgrid" style="grid-template-columns:1fr"><label><input type="radio" name="spd-pb-ms" value="complete"><span>My manuscript is complete</span></label><label><input type="radio" name="spd-pb-ms" value="beginner"><span>I\'m a true beginner: my manuscript isn\'t finished, or I\'ve never pitched before</span></label></div></fieldset><label class="spd-ql" for="spd-pb-persp" style="margin-top:16px">What perspective does your book bring that publishing hasn\'t heard enough of?</label><textarea id="spd-pb-persp" class="spd-field" rows="4" placeholder="A few sentences. This is what we review applications on."></textarea><div class="spd-pbopt"><b>Optional: how you identify</b>You don\'t have to answer anything below. Skipping it won\'t count against your application. Whatever you share stays with the StoryCraft team and is <b style="display:inline">never shared with agents</b>.</div>' + e("BIPOC: race and ethnicity", ["Black or African American", "African or Afro-Caribbean", "Afro-Latinx", "Latinx or Hispanic", "Indigenous, Native American or Alaska Native", "First Nations, Métis or Inuit", "East Asian", "South Asian", "Southeast Asian", "Middle Eastern or North African", "Native Hawaiian or Pacific Islander", "Multiracial"]) + e("LGBTQ+", ["Lesbian", "Gay", "Bisexual", "Pansexual", "Queer", "Transgender", "Nonbinary or genderqueer", "Two-Spirit", "Asexual or aromantic", "Intersex", "Questioning"]) + e("Disability", ["Disabled", "Chronically ill", "Neurodivergent", "Deaf or hard of hearing", "Blind or low vision"]) + '<p class="spd-pbpriv">We use your answers only to review your application.</p><label class="spd-chk spd-chk-top"><input type="checkbox" id="spd-pb-ai"><span>My pitch and pages are my own writing, not AI-generated.</span></label><button class="spd-btn spd-btn-gold" type="button" id="spd-pb-go" style="margin-top:16px">Send my application</button>', B("spd-m-pb");
+   var ag = function() {
+    var e = q(h("spd-pb-ev").value);
+    h("spd-pb-ags").innerHTML = e.length ? '<div class="spd-pbag">' + e.map(function(e) {
+     return '<label><input type="checkbox" data-spd-pbag="' + e.id + '"><span>' + T(e.name) + "<small>" + T(e.agency) + " · " + T(KU(e.date).split(",")[0]) + "</small></span></label>"
+    }).join("") + "</div>" : '<p class="spd-hint">Agents for this Pitch Day aren\'t announced yet. We\'ll ask you to choose once they are.</p>'
+   };
+   ag(), h("spd-pb-ev").onchange = ag, h("spd-pb-go").onclick = function() {
     var e = h("spd-m-pb-body"),
      t = h("spd-pb-email").value.trim(),
      a = e.querySelector('[name="spd-pb-ms"]:checked'),
      s = h("spd-pb-persp").value.trim().split(/\s+/).length >= 10;
-    h("spd-pb-name").value.trim() && /^\S+@\S+\.\S+$/.test(t) && h("spd-pb-book").value.trim() ? h("spd-pb-blurb").value.trim().split(/\s+/).length < 15 ? A("Add a blurb of at least a few sentences") : a ? s ? h("spd-pb-ai").checked ? e.innerHTML = '<p class="spd-serif" style="font-size:26px">Application received.</p><p>We\'ll email <b>' + T(t) + "</b> once applications are reviewed. If you're approved, you'll get a link to book open pro-bono times, first come, first served. (Demo: nothing was sent.)</p>" : A("Check the box about your own writing") : A("Tell us, in a few sentences, what perspective your book brings") : A("Tell us where your manuscript is") : A("Add your name, email and book")
+    h("spd-pb-name").value.trim() && /^\S+@\S+\.\S+$/.test(t) && h("spd-pb-book").value.trim() ? q(h("spd-pb-ev").value).length && !e.querySelector("[data-spd-pbag]:checked") ? A("Choose at least one agent you'd like to pitch") : h("spd-pb-blurb").value.trim().split(/\s+/).length < 15 ? A("Add a blurb of at least a few sentences") : a ? s ? h("spd-pb-ai").checked ? e.innerHTML = '<p class="spd-serif" style="font-size:26px">Application received.</p><p>We\'ll email <b>' + T(t) + "</b> once applications are reviewed. If you're approved, you'll get a link to book open scholarship times with the agents you chose, first come, first served. (Demo: nothing was sent.)</p>" : A("Check the box about your own writing") : A("Tell us, in a few sentences, what perspective your book brings") : A("Tell us where your manuscript is") : A("Add your name, email and book")
    }
   }
  }();
